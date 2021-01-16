@@ -1,7 +1,7 @@
 import {GET_PROJECTS} from './types';
-import {Project} from '../interfaces';
+import {projects} from '../utils/fakeData';
 
 
-export const fetchProjects = (projects: Project[]) =>(
+export const fetchProjects = () =>(
   {type: GET_PROJECTS, payload: projects}
 )

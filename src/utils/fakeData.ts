@@ -25,5 +25,6 @@ export const project : Project = {
   projectName: 'protfolio for mike',
 }
 
-export const projects: Project[] = new Array(5).fill(project)
+export const projects = new Array(5).fill(project);
+
 

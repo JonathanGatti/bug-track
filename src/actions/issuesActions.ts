@@ -1,7 +1,6 @@
 import {GET_ISSUES} from './types';
-import {Issue} from '../interfaces';
+import {issues} from '../utils/fakeData';
 
-
-export const fetchIssues = (issues: Issue[]) =>(
+export const fetchIssues = () =>(
   {type: GET_ISSUES, payload: issues}
 )

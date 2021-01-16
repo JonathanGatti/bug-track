@@ -1,10 +1,9 @@
 import {GET_ISSUES} from '../actions/types';
-import {issues} from '../utils/fakeData';
 
-export const issuesReducer = (state = issues, action: any) => {
+export const issuesReducer = (state = [], action: any) => {
   switch(action.type){
     case GET_ISSUES:
-      return {...state, issues: action.payload}
+      return {...state, issues: [action.payload]}
     default:
       return state;
   }

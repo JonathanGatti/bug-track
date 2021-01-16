@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import List from '../../components/List';
+import { connect } from 'react-redux';
 import { projects } from '../../utils/fakeData';
+import { fetchProjects } from '../../actions/projectsActions';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -11,13 +13,20 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ProjectsList = () => {
+const ProjectsList = ({ fetchProjects, projects }: any) => {
+  useEffect(() => {
+    fetchProjects();
+  }, []);
   return (
     <Container>
       <h3>Projects List</h3>
-      <List {...projects} />
+      <List {...projects.projects} />
     </Container>
   );
 };
 
-export default ProjectsList;
+const mapStateToProps = (state: any) => {
+  return { projects: state.projects };
+};
+
+export default connect(mapStateToProps, { fetchProjects })(ProjectsList);
