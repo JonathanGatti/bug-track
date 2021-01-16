@@ -10,13 +10,13 @@ const Navbar = () => {
         <Link to="/">Home</Link>
       </Menu.Item>
       <Menu.Item>
-        <Link to="/">Projects</Link>
+        <Link to="/projects">Projects</Link>
       </Menu.Item>
       <Menu.Item>
-        <Link to="/">Issues</Link>
+        <Link to="/create/issue">Create Issue</Link>
       </Menu.Item>
       <Menu.Item>
-        <Link to="/">Teams</Link>
+        <Link to="/teams">Teams</Link>
       </Menu.Item>
       <Menu.Item position="right">
         <LoginButton />

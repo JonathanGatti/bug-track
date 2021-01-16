@@ -6,6 +6,7 @@ import IssuePage from './pages/IssuePage';
 import ProjectPage from './pages/ProjectPage';
 import ProjectsList from './pages/ProjectsList';
 import Navbar from './components/Navbar';
+import CreateIssue from './pages/CreateIssue';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/projects" render={() => <ProjectsList />} />
         <Route exact path="/project/:id" render={() => <ProjectPage />} />
         <Route exact path="/issue/:id" render={() => <IssuePage />} />
+        <Route exact path="/create/issue" render={() => <CreateIssue />} />
       </Switch>
     </AppContainer>
   );
