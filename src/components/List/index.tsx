@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Project, Issue } from '../../interfaces';
 import { renderIssues } from '../../utils/renderIssues';
 import { renderProjects } from '../../utils/renderProjects';
+import Spinner from '../../common/spinner';
 
 const ListContainer = styled.div`
   width: 70vw;
@@ -21,7 +22,7 @@ const List = (items: Project[] | Issue[]) => {
 
   const render = () => {
     if (!list[0]) {
-      return null;
+      return <Spinner />;
     } else if (list[0].projectId) {
       return renderProjects(list);
     } else {
