@@ -1,9 +1,16 @@
 import {GET_ISSUES} from '../actions/types';
+import _ from 'lodash';
+import {Issue} from '../interfaces';
 
-export const issuesReducer = (state = [], action: any) => {
+interface Action {
+  type: string,
+  payload: Issue[]
+}
+
+export const issuesReducer = (state = [], action: Action) => {
   switch(action.type){
     case GET_ISSUES:
-      return {...state, issues: [action.payload]}
+      return {...state, ...action.payload}
     default:
       return state;
   }

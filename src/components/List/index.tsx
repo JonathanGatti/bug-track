@@ -16,7 +16,8 @@ const List = (items: Project[] | Issue[]) => {
   const [list, setList] = useState<any>([]);
 
   useEffect(() => {
-    setList(_.values(items));
+    setList([..._.values(items)]);
+    console.log(list);
   }, [list.length]);
 
   const render = () => {
