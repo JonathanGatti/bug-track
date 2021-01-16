@@ -4,12 +4,26 @@ import { HashRouter } from 'react-router-dom';
 import './index.css';
 import 'semantic-ui-css/semantic.min.css';
 import App from './App';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { reducers } from './reducers';
+import reduxThunk from 'redux-thunk';
 import reportWebVitals from './reportWebVitals';
+
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(reduxThunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
