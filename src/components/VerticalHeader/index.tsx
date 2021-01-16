@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react';
 
 const VerticalHeader = () => {
   return (
-    <Menu vertical inverted size="huge">
+    <Menu vertical inverted size="large">
       <Menu.Item name="projects">
         <Menu.Header as="h4">Projects</Menu.Header>
         <p>Check out our new projects</p>
