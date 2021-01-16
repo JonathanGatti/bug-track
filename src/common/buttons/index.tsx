@@ -1,5 +1,13 @@
 import { Button } from 'semantic-ui-react';
 
-export const LoginButton = () => {
-  return <Button content="Log in" inverted color="red" />;
-};
+export const LoginButton = () => (
+  <Button inverted color="red">
+    Log in
+  </Button>
+);
+
+export const PrimaryButton = () => (
+  <Button inverted color="blue">
+    View More
+  </Button>
+);

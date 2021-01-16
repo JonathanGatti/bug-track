@@ -1,5 +1,6 @@
 import { Table } from 'semantic-ui-react';
 import { Issue } from '../interfaces';
+import { PrimaryButton } from '../common/buttons';
 
 export const renderIssues = (_list: Issue[]) => {
   return (
@@ -9,6 +10,7 @@ export const renderIssues = (_list: Issue[]) => {
           <Table.HeaderCell>Issue Id</Table.HeaderCell>
           <Table.HeaderCell>Author</Table.HeaderCell>
           <Table.HeaderCell>Description</Table.HeaderCell>
+          <Table.HeaderCell />
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -17,6 +19,9 @@ export const renderIssues = (_list: Issue[]) => {
             <Table.Cell>{obj.issueId}</Table.Cell>
             <Table.Cell>{obj.author}</Table.Cell>
             <Table.Cell>{obj.description}</Table.Cell>
+            <Table.Cell>
+              <PrimaryButton />
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
