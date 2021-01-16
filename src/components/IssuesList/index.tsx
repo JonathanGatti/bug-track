@@ -1,5 +1,5 @@
 import React from 'react';
-import List from '../../common/list';
+import List from '../List';
 import { issues } from '../../utils/fakeData';
 
 const IssuesList = () => <List {...issues} />;

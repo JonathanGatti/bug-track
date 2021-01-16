@@ -1,5 +1,5 @@
 import React from 'react';
-import List from '../../common/list';
+import List from '../../components/List';
 import { projects } from '../../utils/fakeData';
 
 const ProjectsList = () => {

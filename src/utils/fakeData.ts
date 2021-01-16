@@ -1,11 +1,12 @@
 import {Issue, Project, Author} from '../interfaces';
 
 export const issue : Issue = {
-  id: 'qjwbjwqb',
+  issueId: 'qjwbjwqb',
   author: 'mike@gmail.com',
   project: 'Portfolio',
   description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
   date: new Date(),
+  active: false,
   priority: 5 
 }
 

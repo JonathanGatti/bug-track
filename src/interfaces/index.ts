@@ -1,9 +1,10 @@
 export interface Issue {
-  id: string;
+  issueId: string;
   author: string;
   project: string;
   description: string;
   date: Date;
+  active: boolean;
   priority: number;
 }
 
