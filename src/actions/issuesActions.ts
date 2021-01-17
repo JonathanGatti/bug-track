@@ -1,8 +1,13 @@
 import {FETCH_ISSUES, FETCH_ISSUE, CREATE_ISSUE, EDIT_ISSUE, DELETE_ISSUE} from './types';
 import {getIssues, getIssue, postIssue, pacthIssue} from '../api/issuesRoutes';
 import { Issue } from '../interfaces';
+import {Dispatch} from 'redux';
 
-export const fetchIssues = () => async (dispatch: any) => {
+interface DispatchGen {
+  type: string;
+}
+
+export const fetchIssues = () => async (dispatch: Dispatch<DispatchGen>) => {
   const res = await getIssues();
   dispatch({type: FETCH_ISSUES, payload: res})
   }
