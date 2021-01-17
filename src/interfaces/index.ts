@@ -5,7 +5,7 @@ export interface Issue {
   description: string;
   date: Date;
   active: boolean;
-  priority: number;
+  priority: string;
 }
 
 export interface Project {

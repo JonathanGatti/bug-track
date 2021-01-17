@@ -7,7 +7,7 @@ export const issue : Issue = {
   description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
   date: new Date(),
   active: false,
-  priority: 5 
+  priority: 'high'
 }
 
 export const author: Author = {

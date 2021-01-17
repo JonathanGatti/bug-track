@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Table } from 'semantic-ui-react';
 import { Issue } from '../../interfaces';
 import { PrimaryButton } from '../../common/buttons';
@@ -20,7 +22,9 @@ const RenderIssues = ({ list }: any) => {
             <Table.Cell>{obj.author}</Table.Cell>
             <Table.Cell>{obj.description}</Table.Cell>
             <Table.Cell>
-              <PrimaryButton />
+              <Link to={`/issue/${obj.issueId}`}>
+                <PrimaryButton />
+              </Link>
             </Table.Cell>
           </Table.Row>
         ))}

@@ -16,7 +16,11 @@ function App() {
         <Route exact path="/" render={() => <HomePage />} />
         <Route exact path="/projects" render={() => <ProjectsList />} />
         <Route exact path="/project/:id" render={() => <ProjectPage />} />
-        <Route exact path="/issue/:id" render={() => <IssuePage />} />
+        <Route
+          exact
+          path="/issue/:id"
+          render={(routeProps) => <IssuePage {...routeProps} />}
+        />
         <Route exact path="/create/issue" render={() => <CreateIssue />} />
       </Switch>
     </AppContainer>
