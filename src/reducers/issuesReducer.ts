@@ -6,12 +6,12 @@ interface Action {
   payload: Issue[]
 }
 
-export const issuesReducer = (state = [], action: Action) => {
+export const issuesReducer = (state = [], action: any) => {
   switch(action.type){
     case FETCH_ISSUES:
       return {...state, ...action.payload}
     case FETCH_ISSUE:
-      return {...state, issue : action.payload}
+      return {...state, [action.payload._id]: action.payload}
     default:
       return state;
   }

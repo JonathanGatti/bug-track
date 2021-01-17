@@ -3,6 +3,7 @@ import { Issue } from '../../interfaces';
 import { Table, Icon } from 'semantic-ui-react';
 
 const IssueDetail = (issue: Issue) => {
+  console.log(issue);
   return (
     <>
       <Table celled structured>
@@ -30,7 +31,7 @@ const IssueDetail = (issue: Issue) => {
               )}
             </Table.Cell>
             <Table.Cell>{issue.priority}</Table.Cell>
-            <Table.Cell>{issue.date.toLocaleDateString()}</Table.Cell>
+            {/* <Table.Cell>{issue.date.toLocaleDateString()}</Table.Cell> */}
           </Table.Row>
         </Table.Body>
       </Table>

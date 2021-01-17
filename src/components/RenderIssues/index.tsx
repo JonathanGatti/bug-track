@@ -22,7 +22,7 @@ const RenderIssues = ({ list }: any) => {
             <Table.Cell>{obj.author}</Table.Cell>
             <Table.Cell>{obj.description}</Table.Cell>
             <Table.Cell>
-              <Link to={`/issue/${obj.issueId}`}>
+              <Link to={`/issue/${obj._id}`}>
                 <PrimaryButton />
               </Link>
             </Table.Cell>

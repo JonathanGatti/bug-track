@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IssueDetail from '../../components/Issue';
-import { issues } from '../../utils/fakeData';
+import { fetchIssue } from '../../actions/issuesActions';
+import { connect } from 'react-redux';
 
-const IssuePage = ({ match }: any) => {
-  const [issue, setIssue] = useState(issues[0]);
-  return (
-    <div>
-      <IssueDetail {...issue} />
-    </div>
-  );
+const IssuePage = ({ match, fetchIssue, issue }: any) => {
+  useEffect(() => {
+    fetchIssue(match.params.id);
+  }, []);
+
+  const render = () => {
+    if (!issue) {
+      return <div>loading</div>;
+    } else {
+      return (
+        <div>
+          <IssueDetail {...issue} />
+        </div>
+      );
+    }
+  };
+  return <>{render()}</>;
 };
 
-export default IssuePage;
+const mapStateToProps = (state: any, ownProps: any) => {
+  return { issue: state.issues![ownProps.match.params.id] };
+};
+export default connect(mapStateToProps, { fetchIssue })(IssuePage);
