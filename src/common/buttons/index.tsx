@@ -11,3 +11,9 @@ export const PrimaryButton = () => (
     View More
   </Button>
 );
+
+export const UserButton = () => (
+  <Button inverted color="green">
+    View User
+  </Button>
+);

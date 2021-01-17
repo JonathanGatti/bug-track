@@ -22,7 +22,7 @@ export const project : Project = {
   teamMembers: teamMembers,
   issues: issues,
   projectId: 'aasb633gsy3',
-  projectName: 'protfolio for mike',
+  projectName: 'portfolio for mike',
 }
 
 export const projects = new Array(5).fill(project);

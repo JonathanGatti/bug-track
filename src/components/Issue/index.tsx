@@ -1,9 +1,8 @@
 import React from 'react';
 import { Issue } from '../../interfaces';
-import { Table, Icon, Tab } from 'semantic-ui-react';
+import { Table, Icon } from 'semantic-ui-react';
 
 const IssueDetail = (issue: Issue) => {
-  console.log();
   return (
     <>
       <Table celled structured>
@@ -24,10 +23,10 @@ const IssueDetail = (issue: Issue) => {
             <Table.Cell>{issue.issueId}</Table.Cell>
             <Table.Cell>{issue.author}</Table.Cell>
             <Table.Cell textAlign="center">
-              {issue.priority ? (
+              {issue.active ? (
                 <Icon color="green" name="checkmark" size="large" />
               ) : (
-                <Icon color="green" name="close" size="large" />
+                <Icon color="red" name="close" size="large" />
               )}
             </Table.Cell>
             <Table.Cell>{issue.priority}</Table.Cell>

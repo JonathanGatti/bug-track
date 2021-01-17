@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Project } from '../../interfaces';
 import { Table } from 'semantic-ui-react';
 import { PrimaryButton } from '../../common/buttons';
@@ -18,7 +20,9 @@ const RenderProjects = ({ list }: any) => {
             <Table.Cell>{obj.projectId}</Table.Cell>
             <Table.Cell>{obj.projectName}</Table.Cell>
             <Table.Cell>
-              <PrimaryButton />
+              <Link to={`/project/${obj.projectId}`}>
+                <PrimaryButton />
+              </Link>
             </Table.Cell>
           </Table.Row>
         ))}
