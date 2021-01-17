@@ -13,7 +13,7 @@ const HomePage = ({ fetchIssues, issues }: any) => {
   return (
     <HomeContainer>
       <VerticalHeader />
-      <List {...issues} />
+      <List items={issues} />
     </HomeContainer>
   );
 };

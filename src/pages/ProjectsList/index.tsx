@@ -19,7 +19,7 @@ const ProjectsList = ({ fetchProjects, projects }: any) => {
   return (
     <Container>
       <h3>Projects List</h3>
-      <List {...projects} />
+      <List items={projects} />
     </Container>
   );
 };

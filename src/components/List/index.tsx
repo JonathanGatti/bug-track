@@ -3,6 +3,8 @@ import _ from 'lodash';
 import { Table } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Project, Issue } from '../../interfaces';
+import RenderIssues from '../RenderIssues';
+import RenderProjects from '../RenderProjects';
 import { renderIssues } from '../../utils/renderIssues';
 import { renderProjects } from '../../utils/renderProjects';
 import Spinner from '../../common/spinner';
@@ -12,21 +14,19 @@ const ListContainer = styled.div`
   margin-left: auto;
 `;
 
-const List = (items: Project[] | Issue[]) => {
-  const [list, setList] = useState<any>([]);
+interface ListProps {
+  items: Issue[] | Project[];
+}
 
-  useEffect(() => {
-    setList([..._.values(items)]);
-    console.log(list);
-  }, [list.length]);
-
+const List = ({ items }: any) => {
+  console.log(items);
   const render = () => {
-    if (!list[0]) {
+    if (!items[0]) {
       return <Spinner />;
-    } else if (list[0].projectId) {
-      return renderProjects(list);
+    } else if (items[0].projectId) {
+      return renderProjects(items);
     } else {
-      return renderIssues(list);
+      return renderIssues(items);
     }
   };
   return (
