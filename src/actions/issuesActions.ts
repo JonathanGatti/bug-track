@@ -1,11 +1,29 @@
-import {GET_ISSUES, GET_ISSUE} from './types';
-import {issues} from '../utils/fakeData';
+import {FETCH_ISSUES, FETCH_ISSUE, CREATE_ISSUE, EDIT_ISSUE, DELETE_ISSUE} from './types';
+import {getIssues, getIssue, postIssue, pacthIssue} from '../api/issuesRoutes';
 import { Issue } from '../interfaces';
 
-export const fetchIssues = () =>(
-  {type: GET_ISSUES, payload: issues}
-)
+export const fetchIssues = () => async (dispatch: any) => {
+  const res = await getIssues();
+  dispatch({type: FETCH_ISSUES, payload: res})
+  }
 
-export const fetchIssue = (id: string ) => (
-  {type: GET_ISSUE }
-)
+export const fetchIssue = (id: string) => async (dispatch: any) => {
+  const res = await getIssue(id);
+  dispatch({type: FETCH_ISSUE, payload: res})
+  }
+
+export const createIssue = (data: Issue) => async (dispatch: any) => {
+    const res = await postIssue(data);
+    dispatch({type: CREATE_ISSUE, payload: res})
+  }
+
+export const editIssue = (data: Issue) => async (dispatch:any) => {
+    const res = await pacthIssue(data);
+
+    dispatch({type: EDIT_ISSUE, payload: res})
+  }
+
+export const deleteIssue = (id: string) => (dispatch: any) => {
+  deleteIssue(id);
+  dispatch({type: DELETE_ISSUE, payload: id})
+}

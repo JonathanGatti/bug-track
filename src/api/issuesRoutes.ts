@@ -20,13 +20,24 @@ export const getIssue = async (id: string) => {
 }
 export const postIssue = async (data: Issue) => {
   try {
-    issues.post('/issues', data,{
+    issues.post('/issues', 
+    data
+    ,{
       headers: {
         'Content-Type': 'application/json',
       }
     }) 
     }catch(err){
       console.log(err);
+  }
+}
+
+export const pacthIssue = async (data: Issue) => {
+  try {
+    let res = await issues.patch(`/issues/${data._id}`)
+    return res.data 
+  } catch(err) {
+    console.log(err);
   }
 }
 
