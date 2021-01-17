@@ -2,7 +2,7 @@ import { Project } from '../../interfaces';
 import { Table } from 'semantic-ui-react';
 import { PrimaryButton } from '../../common/buttons';
 
-const RenderProjects = ({ _list }: any) => {
+const RenderProjects = ({ list }: any) => {
   return (
     <>
       <Table.Header>
@@ -13,7 +13,7 @@ const RenderProjects = ({ _list }: any) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {_list.map((obj: Project) => (
+        {list.map((obj: Project) => (
           <Table.Row>
             <Table.Cell>{obj.projectId}</Table.Cell>
             <Table.Cell>{obj.projectName}</Table.Cell>

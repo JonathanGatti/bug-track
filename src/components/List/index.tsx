@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { Table } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Project, Issue } from '../../interfaces';
 import RenderIssues from '../RenderIssues';
 import RenderProjects from '../RenderProjects';
-import { renderIssues } from '../../utils/renderIssues';
-import { renderProjects } from '../../utils/renderProjects';
 import Spinner from '../../common/spinner';
 
 const ListContainer = styled.div`
@@ -19,14 +17,13 @@ interface ListProps {
 }
 
 const List = ({ items }: any) => {
-  console.log(items);
   const render = () => {
     if (!items[0]) {
       return <Spinner />;
     } else if (items[0].projectId) {
-      return renderProjects(items);
+      return <RenderProjects list={items} />;
     } else {
-      return renderIssues(items);
+      return <RenderIssues list={items} />;
     }
   };
   return (

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { HomeContainer } from './styles';
 import { connect } from 'react-redux';
 import VerticalHeader from '../../components/VerticalHeader';
-import IssuesList from '../../components/IssuesList';
 import List from '../../components/List';
 import { fetchIssues } from '../../actions/issuesActions';
 
