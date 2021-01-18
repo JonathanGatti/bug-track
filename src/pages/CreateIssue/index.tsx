@@ -25,7 +25,7 @@ const CreateIssue = ({
 
   useEffect(() => {
     fetchProjects();
-  }, [projects.length]);
+  }, []);
 
   const handleClick = () => {
     const newIssue = {
