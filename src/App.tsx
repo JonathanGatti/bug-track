@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import CreateIssue from './pages/CreateIssue';
 import UserPage from './pages/UserPage';
 import CreateProject from './pages/CreateProject';
+import CreateUser from './pages/CreateUser';
 
 function App() {
   return (
@@ -37,6 +38,11 @@ function App() {
           exact
           path="/create/project"
           render={(routeProps) => <CreateProject {...routeProps} />}
+        />
+        <Route
+          exact
+          path="/create/user"
+          render={(routeProps) => <CreateUser {...routeProps} />}
         />
       </Switch>
     </AppContainer>

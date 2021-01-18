@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import VerticalHeader from '../../components/VerticalHeader';
 import List from '../../components/List';
 import { fetchIssues } from '../../actions/issuesActions';
+import { fetchUsers } from '../../actions/usersActions';
 
-const HomePage = ({ fetchIssues, issues }: any) => {
+const HomePage = ({ fetchIssues, issues, fetchUsers }: any) => {
   useEffect(() => {
     fetchIssues();
+    fetchUsers();
   }, [issues.length]);
   return (
     <HomeContainer>
@@ -21,4 +23,4 @@ const mapStateToProps = (state: any) => {
   return { issues: Object.values(state.issues) };
 };
 
-export default connect(mapStateToProps, { fetchIssues })(HomePage);
+export default connect(mapStateToProps, { fetchIssues, fetchUsers })(HomePage);
