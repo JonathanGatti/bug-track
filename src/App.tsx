@@ -27,7 +27,11 @@ function App() {
           path="/user/:id"
           render={(routeProps) => <UserPage {...routeProps} />}
         />
-        <Route exact path="/create/issue" render={() => <CreateIssue />} />
+        <Route
+          exact
+          path="/create/issue"
+          render={(routeProps) => <CreateIssue {...routeProps} />}
+        />
       </Switch>
     </AppContainer>
   );

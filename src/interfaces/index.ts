@@ -1,6 +1,6 @@
-import {DropdownProps} from 'semantic-ui-react';
 export interface Issue {
   _id?: string | number;
+  issueName: string;
   issueId: string;
   author: string;
   project: string;

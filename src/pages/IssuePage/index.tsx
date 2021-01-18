@@ -15,7 +15,7 @@ const IssuePage = ({ match, fetchIssue, issue }: any) => {
     } else {
       return (
         <div>
-          <IssueDetail {...issue} />
+          <IssueDetail issue={issue} />
         </div>
       );
     }

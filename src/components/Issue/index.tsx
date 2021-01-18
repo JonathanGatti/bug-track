@@ -1,8 +1,13 @@
 import React from 'react';
 import { Issue } from '../../interfaces';
-import { Table, Icon } from 'semantic-ui-react';
+import { Table, Icon, Button } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { deleteIssue } from '../../actions/issuesActions';
 
-const IssueDetail = (issue: Issue) => {
+const IssueDetail = ({ issue, deleteIssue }: any) => {
+  const handleClick = (id: any) => {
+    deleteIssue(id);
+  };
   return (
     <>
       <Table celled structured>
@@ -41,9 +46,14 @@ const IssueDetail = (issue: Issue) => {
         <Table.Row>
           <Table.Cell>{issue.description}</Table.Cell>
         </Table.Row>
+        <Table.Cell>
+          <Button onClick={() => handleClick(issue._id)} inverted color="red">
+            Delete
+          </Button>
+        </Table.Cell>
       </Table>
     </>
   );
 };
 
-export default IssueDetail;
+export default connect(null, { deleteIssue })(IssueDetail);

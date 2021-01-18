@@ -42,7 +42,7 @@ export const pacthIssue = async (data: Issue) => {
   }
 }
 
-export const deleteIssue = async (id: string) => {
+export const deleteById = async (id: string) => {
   try {
     await issues.delete(`/issues/${id}`)
   } catch (err){

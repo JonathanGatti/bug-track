@@ -18,7 +18,7 @@ const RenderIssues = ({ list }: any) => {
       <Table.Body>
         {list.map((obj: Issue) => (
           <Table.Row active={obj.active}>
-            <Table.Cell>{obj.issueId}</Table.Cell>
+            <Table.Cell>{obj.issueName}</Table.Cell>
             <Table.Cell>{obj.author}</Table.Cell>
             <Table.Cell>{obj.description}</Table.Cell>
             <Table.Cell>

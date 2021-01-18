@@ -11,7 +11,7 @@ interface CreateIssueProps {
   createIssue: (data: Issue) => void;
 }
 
-const CreateIssue = ({ createIssue }: CreateIssueProps) => {
+const CreateIssue = ({ history, createIssue }: any) => {
   const author = 'gino@hotmail.com';
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');
@@ -29,6 +29,7 @@ const CreateIssue = ({ createIssue }: CreateIssueProps) => {
       priority: priority,
     };
     createIssue(newIssue);
+    history.push('/');
   };
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIssueName(e.target.value);
