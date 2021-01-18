@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import IssueDetail from '../../components/Issue';
 import { fetchIssue } from '../../actions/issuesActions';
 import { connect } from 'react-redux';
+import Spinner from '../../common/spinner';
 
 const IssuePage = ({ match, fetchIssue, issue }: any) => {
   useEffect(() => {
@@ -10,7 +11,7 @@ const IssuePage = ({ match, fetchIssue, issue }: any) => {
 
   const render = () => {
     if (!issue) {
-      return <div>loading</div>;
+      return <Spinner />;
     } else {
       return (
         <div>

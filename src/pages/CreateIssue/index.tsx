@@ -37,7 +37,7 @@ const CreateIssue = ({ createIssue }: CreateIssueProps) => {
     setDescription(e.target.value);
   };
 
-  const handleDropChange = (
+  const handleProjectRefChange = (
     e: React.SyntheticEvent<HTMLElement, Event>,
     data: DropdownProps
   ) => {
@@ -71,7 +71,7 @@ const CreateIssue = ({ createIssue }: CreateIssueProps) => {
             fluid
             selection
             options={projects}
-            onChange={handleDropChange}
+            onChange={handleProjectRefChange}
           />
         </Form.Field>
         <Form.Field>
