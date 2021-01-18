@@ -17,7 +17,7 @@ export interface Project {
   projectId: string | number;
   projectName: string;
   text: string;
-  key: number;
+  key?: number;
   value: number | string;
 }
 

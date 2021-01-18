@@ -1,4 +1,4 @@
-import {FETCH_PROJECTS, FETCH_PROJECT, EDIT_PROJECT,DELETE_PROJECT} from './types';
+import {FETCH_PROJECTS, FETCH_PROJECT, EDIT_PROJECT,DELETE_PROJECT, CREATE_PROJECT} from './types';
 import {getProject, getProjects, postProject, patchProject, deleteProjectById} from '../api/projects/projectsRoutes';
 import {Dispatch} from 'redux';
 import {Project} from '../interfaces';
@@ -11,6 +11,11 @@ export const fetchProjects = () => async (dispatch: Dispatch) => {
 export const fetchProject = (id: string) => async (dispatch: Dispatch) => {
   const res = await getProject(id);
   dispatch({type: FETCH_PROJECT, payload: res})
+}
+
+export const createProject = (data: Project) => async (dispatch: Dispatch) => {
+  const res = await postProject(data);
+  dispatch({type: CREATE_PROJECT, payload: res})
 }
 
 export const editProject = (data: Project) => async (dispatch: Dispatch) => {
