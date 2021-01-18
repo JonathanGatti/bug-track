@@ -36,6 +36,7 @@ export const postUser = async (data: Author) => {
 export const deleteUserById = async (id:string) => {
   try {
     await users.delete(`/users/${id}`);
+    return id;
   } catch(err){
     console.log(err);
   }
