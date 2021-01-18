@@ -4,9 +4,10 @@ import { Table, Icon, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { deleteIssue } from '../../actions/issuesActions';
 
-const IssueDetail = ({ issue, deleteIssue }: any) => {
+const IssueDetail = ({ history, issue, deleteIssue }: any) => {
   const handleClick = (id: any) => {
     deleteIssue(id);
+    history.push('/');
   };
   return (
     <>

@@ -4,7 +4,7 @@ import { fetchIssue } from '../../actions/issuesActions';
 import { connect } from 'react-redux';
 import Spinner from '../../common/spinner';
 
-const IssuePage = ({ match, fetchIssue, issue }: any) => {
+const IssuePage = ({ history, match, fetchIssue, issue }: any) => {
   useEffect(() => {
     fetchIssue(match.params.id);
   }, []);
@@ -15,7 +15,7 @@ const IssuePage = ({ match, fetchIssue, issue }: any) => {
     } else {
       return (
         <div>
-          <IssueDetail issue={issue} />
+          <IssueDetail history={history} issue={issue} />
         </div>
       );
     }
