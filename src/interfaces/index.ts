@@ -21,6 +21,7 @@ export interface Project {
 }
 
 export interface Author {
+  _id?: string | number;
   userId: string;
   userName: string;
 }

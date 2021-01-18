@@ -16,7 +16,7 @@ const Navbar = () => {
         <Link to="/create/issue">Create Issue</Link>
       </Menu.Item>
       <Menu.Item>
-        <Link to="/teams">Teams</Link>
+        <Link to="/create/project">Create Project</Link>
       </Menu.Item>
       <Menu.Item position="right">
         <LoginButton />

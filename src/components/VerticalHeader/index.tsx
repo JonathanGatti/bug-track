@@ -12,9 +12,12 @@ const VerticalHeader = () => {
           <p>Create New Issue</p>
         </Link>
       </Menu.Item>
-      <Menu.Item name="projects">
-        <Menu.Header as="h4">Projects</Menu.Header>
-        <p>Check out our new projects</p>
+      <Menu.Item name="Project">
+        <Link to="/create/project">
+          {' '}
+          <Menu.Header as="h4">Project</Menu.Header>
+          <p>Create New Project</p>
+        </Link>
       </Menu.Item>
       <Menu.Item name="users">
         <Menu.Header as="h4">Users</Menu.Header>

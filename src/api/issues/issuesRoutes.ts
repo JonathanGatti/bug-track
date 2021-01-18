@@ -1,5 +1,5 @@
-import { Issue } from '../interfaces';
-import issues from './issuesBaseUrl';
+import { Issue } from '../../interfaces';
+import issues from '../baseUrl';
 
 export const getIssues = async () => {
   try {
@@ -27,10 +27,10 @@ export const postIssue = async (data: Issue) => {
         'Content-Type': 'application/json',
       }
     }) 
+    return data;
     }catch(err){
       console.log(err);
   }
-  return data;
 }
 
 export const pacthIssue = async (data: Issue) => {
@@ -42,7 +42,7 @@ export const pacthIssue = async (data: Issue) => {
   }
 }
 
-export const deleteById = async (id: string) => {
+export const deleteIssueById = async (id: string) => {
   try {
     await issues.delete(`/issues/${id}`)
   } catch (err){

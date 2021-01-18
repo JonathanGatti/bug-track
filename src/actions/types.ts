@@ -11,3 +11,9 @@ export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const CREATE_PROJECT = 'CREATE_PROJECT';
 export const DELETE_PROJECT = 'DELETE_PROJECT';
 export const EDIT_PROJECT = 'EDIT_PROJECT';
+
+//users actions:
+export const FETCH_USERS = 'FETCH_USERS';
+export const FETCH_USER = 'FETCH_USER';
+export const CREATE_USER = 'CREATE_USER';
+export const DELETE_USER = 'DELETE_USER';

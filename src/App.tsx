@@ -8,6 +8,7 @@ import ProjectsList from './pages/ProjectsList';
 import Navbar from './components/Navbar';
 import CreateIssue from './pages/CreateIssue';
 import UserPage from './pages/UserPage';
+import CreateProject from './pages/CreateProject';
 
 function App() {
   return (
@@ -31,6 +32,11 @@ function App() {
           exact
           path="/create/issue"
           render={(routeProps) => <CreateIssue {...routeProps} />}
+        />
+        <Route
+          exact
+          path="/create/project"
+          render={(routeProps) => <CreateProject {...routeProps} />}
         />
       </Switch>
     </AppContainer>

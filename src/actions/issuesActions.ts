@@ -1,5 +1,5 @@
 import {FETCH_ISSUES, FETCH_ISSUE, CREATE_ISSUE, EDIT_ISSUE, DELETE_ISSUE} from './types';
-import {getIssues, getIssue, postIssue, pacthIssue, deleteById} from '../api/issuesRoutes';
+import {getIssues, getIssue, postIssue, pacthIssue, deleteIssueById} from '../api/issues/issuesRoutes';
 import { Issue } from '../interfaces';
 import {Dispatch} from 'redux';
 
@@ -25,6 +25,6 @@ export const editIssue = (data: Issue) => async (dispatch: Dispatch) => {
   }
 
 export const deleteIssue = (id: string) => (dispatch: Dispatch) => {
-  deleteById(id);
+  deleteIssueById(id);
   dispatch({type: DELETE_ISSUE, payload: id})
 }
