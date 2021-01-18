@@ -13,7 +13,7 @@ export interface Issue {
 export interface Project {
   _id?: string;
   teamMembers: Author[];
-  issues: Issue[];
+  projectIssues: Issue[];
   projectId: string | number;
   projectName: string;
   text: string;

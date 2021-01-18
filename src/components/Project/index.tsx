@@ -14,12 +14,12 @@ const Container = styled.div`
 
 const TableContainer = styled.div``;
 
-const ProjectDetail = (project: Project) => {
+const ProjectDetail = ({ project }: any) => {
   return (
     <>
       <h2>{project.projectName}</h2>
       <Container>
-        <List items={project.issues} />
+        <List items={project.projectIssues} />
         <TableContainer>
           <Table>
             <Table.Header>
@@ -28,7 +28,7 @@ const ProjectDetail = (project: Project) => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {project.teamMembers.map((member) => (
+              {project.teamMembers.map((member: any) => (
                 <Table.Row>
                   <Table.Cell>{member.userName}</Table.Cell>
                   <Table.Cell>

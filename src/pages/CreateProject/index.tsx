@@ -34,7 +34,7 @@ const CreateProject = ({
   const handleClick = () => {
     const newProject: Project = {
       teamMembers: users,
-      issues: issues,
+      projectIssues: issues,
       projectId: projectId,
       projectName: name,
       text: name,

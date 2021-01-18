@@ -20,7 +20,7 @@ const RenderProjects = ({ list }: any) => {
             <Table.Cell>{obj.projectId}</Table.Cell>
             <Table.Cell>{obj.projectName}</Table.Cell>
             <Table.Cell>
-              <Link to={`/project/${obj.projectId}`}>
+              <Link to={`/project/${obj._id}`}>
                 <PrimaryButton />
               </Link>
             </Table.Cell>

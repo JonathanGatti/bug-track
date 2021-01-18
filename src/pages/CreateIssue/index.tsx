@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createIssue } from '../../actions/issuesActions';
+import { fetchProjects } from '../../actions/projectsActions';
 import { Issue } from '../../interfaces';
-import { projects } from '../../utils/fakeData';
 import { priorities } from '../../utils/priorities';
 import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
@@ -11,12 +11,21 @@ interface CreateIssueProps {
   createIssue: (data: Issue) => void;
 }
 
-const CreateIssue = ({ history, createIssue }: any) => {
+const CreateIssue = ({
+  history,
+  createIssue,
+  fetchProjects,
+  projects,
+}: any) => {
   const author = 'gino@hotmail.com';
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<any>('');
+
+  useEffect(() => {
+    fetchProjects();
+  }, [projects.length]);
 
   const handleClick = () => {
     const newIssue = {
@@ -92,4 +101,4 @@ const CreateIssue = ({ history, createIssue }: any) => {
   );
 };
 
-export default connect(null, { createIssue })(CreateIssue);
+export default connect(null, { createIssue, fetchProjects })(CreateIssue);

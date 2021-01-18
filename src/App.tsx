@@ -18,7 +18,11 @@ function App() {
       <Switch>
         <Route exact path="/" render={() => <HomePage />} />
         <Route exact path="/projects" render={() => <ProjectsList />} />
-        <Route exact path="/project/:id" render={() => <ProjectPage />} />
+        <Route
+          exact
+          path="/project/:id"
+          render={(routeProps) => <ProjectPage {...routeProps} />}
+        />
         <Route
           exact
           path="/issue/:id"
