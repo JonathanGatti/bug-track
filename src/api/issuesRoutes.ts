@@ -30,6 +30,7 @@ export const postIssue = async (data: Issue) => {
     }catch(err){
       console.log(err);
   }
+  return data;
 }
 
 export const pacthIssue = async (data: Issue) => {

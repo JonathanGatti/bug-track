@@ -1,4 +1,5 @@
 import {Issue, Project, Author} from '../interfaces';
+import { generateId } from './generateId';
 
 export const issue : Issue = {
   issueId: 'qjwbjwqb',
@@ -18,13 +19,21 @@ export const author: Author = {
 export const teamMembers:Author[] = new Array(5).fill(author)
 export const issues: Issue[] = new Array(5).fill(issue);
 
+const id = generateId()
+
 export const project : Project = {
   teamMembers: teamMembers,
   issues: issues,
-  projectId: 'aasb633gsy3',
+  projectId: id,
   projectName: 'portfolio for mike',
+  text: 'portfolio for mike',
+  key: Math.random() * 100,
+  value: id
 }
 
-export const projects = new Array(5).fill(project);
+
+export const projects = new Array(5).fill(project)
+
+// export const projects = new Array(5).fill(project);
 
 
