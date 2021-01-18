@@ -16,7 +16,7 @@ const RenderProjects = ({ list }: any) => {
       </Table.Header>
       <Table.Body>
         {list.map((obj: Project) => (
-          <Table.Row>
+          <Table.Row key={obj._id}>
             <Table.Cell>{obj.projectId}</Table.Cell>
             <Table.Cell>{obj.projectName}</Table.Cell>
             <Table.Cell>

@@ -25,7 +25,7 @@ const CreateIssue = ({
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [projects.length]);
 
   const handleClick = () => {
     const newIssue = {
@@ -69,13 +69,14 @@ const CreateIssue = ({
           <Form.Input onChange={handleNameChange} placeholder="Issue Name" />
         </Form.Field>
         <Form.Field>
-          <label>Issue Description</label>
+          <label>Description</label>
           <Form.Input
             onChange={handleDescriptionChange}
             placeholder="Description"
           />
         </Form.Field>
         <Form.Field>
+          <label>Select a project reference</label>
           <Dropdown
             placeholder="Select A project Reference"
             fluid
@@ -85,6 +86,7 @@ const CreateIssue = ({
           />
         </Form.Field>
         <Form.Field>
+          <label>Select the priority</label>
           <Dropdown
             placeholder="Select The Priority"
             fluid
@@ -101,4 +103,9 @@ const CreateIssue = ({
   );
 };
 
-export default connect(null, { createIssue, fetchProjects })(CreateIssue);
+const mapStateToProps = (state: any) => {
+  return { projects: Object.values(state.projects) };
+};
+export default connect(mapStateToProps, { createIssue, fetchProjects })(
+  CreateIssue
+);
