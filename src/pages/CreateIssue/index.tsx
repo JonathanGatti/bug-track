@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
+import { RouteComponentProps, StaticContext } from 'react-router';
 import { connect } from 'react-redux';
 import { Project } from '../../interfaces';
 import { createIssue } from '../../actions/issuesActions';
@@ -9,7 +10,7 @@ import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
 import styled from 'styled-components';
 import { History, LocationState } from 'history';
-import * as H from 'history';
+
 const Container = styled.div`
   max-width: 60vw;
   margin-right: auto;
@@ -17,7 +18,7 @@ const Container = styled.div`
 `;
 
 interface CreateIssueProps {
-  history: History<LocationState>;
+  history: History<LocationState | any>;
   createIssue: (data: Issue) => void;
   fetchProjects: () => void;
   projects: Project[];
@@ -32,7 +33,7 @@ const CreateIssue = ({
   projects,
   _projectRef,
   onAddIssue,
-}: CreateIssueProps) => {
+}: any) => {
   const author = 'gino@hotmail.com';
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');

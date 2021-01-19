@@ -43,7 +43,7 @@ interface mapState {
   ownProps: RouteComponentProps<any, StaticContext, unknown>;
 }
 
-const mapStateToProps = ({ state, ownProps }: mapState) => {
+const mapStateToProps = (state: any, ownProps: any) => {
   return { project: state.projects![ownProps.match.params.id] };
 };
 export default connect(mapStateToProps, { fetchProject })(ProjectPage);

@@ -12,7 +12,7 @@ const Container = styled.div`
 interface UsersListProps {
   users: Author[];
   addUser: boolean;
-  onClick: (user: Author) => void;
+  onClick?: (user: Author) => void;
 }
 const UsersList = ({ users, addUser, onClick }: UsersListProps) => {
   return (
@@ -24,7 +24,7 @@ const UsersList = ({ users, addUser, onClick }: UsersListProps) => {
               <Table.Cell>{user.userName}</Table.Cell>
               <Table.Cell>
                 {addUser ? (
-                  <Button inverted color="green" onClick={() => onClick(user)}>
+                  <Button inverted color="green" onClick={() => onClick!(user)}>
                     Add User
                   </Button>
                 ) : (

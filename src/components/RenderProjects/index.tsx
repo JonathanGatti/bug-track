@@ -21,7 +21,7 @@ const RenderProjects = ({ list }: any) => {
             <Table.Cell>
               <Link to={`/project/${obj._id}`}>
                 <Button inverted color="blue">
-                  Log in
+                  View More
                 </Button>
               </Link>
             </Table.Cell>

@@ -37,12 +37,14 @@ const IssuePage = ({ history, match, fetchIssue, issue }: IssuePageProps) => {
   return <>{render()}</>;
 };
 
-interface mapState {
-  state: Issue[] | any;
-  ownProps: RouteComponentProps<any, StaticContext, unknown>;
+interface State {
+  issues: Issue[];
+}
+interface OwnProps {
+  match: any;
 }
 
-const mapStateToProps = ({ state, ownProps }: mapState) => {
+const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return { issue: state.issues![ownProps.match.params.id] };
 };
 export default connect(mapStateToProps, { fetchIssue })(IssuePage);
