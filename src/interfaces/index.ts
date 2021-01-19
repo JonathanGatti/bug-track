@@ -1,5 +1,5 @@
 export interface Issue {
-  _id?: string | number;
+  _id?: string | number ;
   issueName: string;
   issueId: string;
   author: string;

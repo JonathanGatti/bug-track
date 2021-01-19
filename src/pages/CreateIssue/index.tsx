@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Project } from '../../interfaces';
 import { createIssue } from '../../actions/issuesActions';
 import { fetchProjects } from '../../actions/projectsActions';
 import { Issue } from '../../interfaces';
@@ -7,7 +8,8 @@ import { priorities } from '../../utils/priorities';
 import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
 import styled from 'styled-components';
-
+import { History, LocationState } from 'history';
+import * as H from 'history';
 const Container = styled.div`
   max-width: 60vw;
   margin-right: auto;
@@ -15,7 +17,12 @@ const Container = styled.div`
 `;
 
 interface CreateIssueProps {
+  history: History<LocationState>;
   createIssue: (data: Issue) => void;
+  fetchProjects: () => void;
+  projects: Project[];
+  _projectRef: string;
+  onAddIssue: (issueName: string, desc: string, priority: any) => void;
 }
 
 const CreateIssue = ({
@@ -25,7 +32,7 @@ const CreateIssue = ({
   projects,
   _projectRef,
   onAddIssue,
-}: any) => {
+}: CreateIssueProps) => {
   const author = 'gino@hotmail.com';
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');
@@ -126,7 +133,11 @@ const CreateIssue = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
+interface mapState {
+  projects: Project[];
+}
+
+const mapStateToProps = (state: mapState) => {
   return { projects: Object.values(state.projects) };
 };
 export default connect(mapStateToProps, { createIssue, fetchProjects })(

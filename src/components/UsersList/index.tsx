@@ -1,19 +1,25 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { UserButton } from '../../common/buttons';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
+import { Author } from '../../interfaces';
 
 const Container = styled.div`
   max-width: 40vw;
 `;
-const UsersList = ({ users, addUser, onClick }: any) => {
+
+interface UsersListProps {
+  users: Author[];
+  addUser: boolean;
+  onClick: (user: Author) => void;
+}
+const UsersList = ({ users, addUser, onClick }: UsersListProps) => {
   return (
     <Container>
       <Table>
         <Table.Body>
-          {users.map((user: any) => (
+          {users.map((user: Author) => (
             <Table.Row>
               <Table.Cell>{user.userName}</Table.Cell>
               <Table.Cell>
@@ -23,7 +29,9 @@ const UsersList = ({ users, addUser, onClick }: any) => {
                   </Button>
                 ) : (
                   <Link to={`/user/${user.userId}`}>
-                    <UserButton />
+                    <Button inverted color="green">
+                      View User
+                    </Button>
                   </Link>
                 )}
               </Table.Cell>

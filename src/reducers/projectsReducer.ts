@@ -1,7 +1,12 @@
 import {FETCH_PROJECTS, FETCH_PROJECT, EDIT_PROJECT,DELETE_PROJECT} from '../actions/types';
 import _ from 'lodash';
 
-export const projectsReducer = (state = {}, action: any) => {
+interface Action {
+  type: string;
+  payload: any
+}
+
+export const projectsReducer = (state = {}, action: Action) => {
   switch(action.type){
     case FETCH_PROJECTS:
       return {...state,  ..._.mapKeys(action.payload, '_id')};

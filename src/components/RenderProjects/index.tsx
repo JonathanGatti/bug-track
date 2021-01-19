@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Project } from '../../interfaces';
-import { Table } from 'semantic-ui-react';
-import { PrimaryButton } from '../../common/buttons';
+import { Table, Button } from 'semantic-ui-react';
 
 const RenderProjects = ({ list }: any) => {
   return (
@@ -21,7 +20,9 @@ const RenderProjects = ({ list }: any) => {
             <Table.Cell>{obj.projectName}</Table.Cell>
             <Table.Cell>
               <Link to={`/project/${obj._id}`}>
-                <PrimaryButton />
+                <Button inverted color="blue">
+                  Log in
+                </Button>
               </Link>
             </Table.Cell>
           </Table.Row>

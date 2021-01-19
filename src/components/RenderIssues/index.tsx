@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Table } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
 import { Issue } from '../../interfaces';
-import { PrimaryButton } from '../../common/buttons';
 
 const RenderIssues = ({ list }: any) => {
   return (
@@ -23,7 +22,9 @@ const RenderIssues = ({ list }: any) => {
             <Table.Cell>{obj.description}</Table.Cell>
             <Table.Cell>
               <Link to={`/issue/${obj._id}`}>
-                <PrimaryButton />
+                <Button inverted color="blue">
+                  View More
+                </Button>
               </Link>
             </Table.Cell>
           </Table.Row>

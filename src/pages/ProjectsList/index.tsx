@@ -3,6 +3,7 @@ import List from '../../components/List';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../../actions/projectsActions';
 import styled from 'styled-components';
+import { Project } from '../../interfaces';
 
 const Container = styled.div`
   width: 70vw;
@@ -12,7 +13,12 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ProjectsList = ({ fetchProjects, projects }: any) => {
+interface ProjectListProps {
+  fetchProjects: () => void;
+  projects: Project[];
+}
+
+const ProjectsList = ({ fetchProjects, projects }: ProjectListProps) => {
   useEffect(() => {
     fetchProjects();
   }, []);
@@ -24,7 +30,11 @@ const ProjectsList = ({ fetchProjects, projects }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
+interface mapState {
+  projects: Project[];
+}
+
+const mapStateToProps = (state: mapState) => {
   return { projects: Object.values(state.projects) };
 };
 

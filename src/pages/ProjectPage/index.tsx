@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import ProjectDetail from '../../components/Project';
-import Project from '../../components/Project';
+import { StaticContext, RouteComponentProps } from 'react-router';
+import ProjectDetail from '../../components/ProjectDetail';
+import { Project } from '../../interfaces';
 import { connect } from 'react-redux';
 import { fetchProject } from '../../actions/projectsActions';
 import Spinner from '../../common/spinner';
+import { History, LocationState } from 'history';
 
-const ProjectPage = ({ history, match, fetchProject, project }: any) => {
+interface MatchParams {
+  params: string;
+  id: string;
+}
+interface ProjectPageProps extends RouteComponentProps<MatchParams> {
+  history: History<LocationState>;
+  fetchProject: (id: string) => void;
+  match: any;
+  project: Project;
+}
+
+const ProjectPage = ({
+  history,
+  match,
+  fetchProject,
+  project,
+}: ProjectPageProps) => {
   useEffect(() => {
     fetchProject(match.params.id);
   }, [project]);
@@ -20,7 +38,12 @@ const ProjectPage = ({ history, match, fetchProject, project }: any) => {
   return <div>{render()}</div>;
 };
 
-const mapStateToProps = (state: any, ownProps: any) => {
+interface mapState {
+  state: Project[] | any;
+  ownProps: RouteComponentProps<any, StaticContext, unknown>;
+}
+
+const mapStateToProps = ({ state, ownProps }: mapState) => {
   return { project: state.projects![ownProps.match.params.id] };
 };
 export default connect(mapStateToProps, { fetchProject })(ProjectPage);

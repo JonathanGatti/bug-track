@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
-import { LoginButton } from '../../common/buttons';
+import { Button } from 'semantic-ui-react';
 
 const Navbar = () => {
   return (
@@ -19,7 +19,9 @@ const Navbar = () => {
         <Link to="/create/project">Create Project</Link>
       </Menu.Item>
       <Menu.Item position="right">
-        <LoginButton />
+        <Button inverted color="red">
+          Log in
+        </Button>
       </Menu.Item>
     </Menu>
   );

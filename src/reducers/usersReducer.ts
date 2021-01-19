@@ -7,7 +7,7 @@ interface Action {
   payload: Author | any
 }
 
-export const usersReducer = (state = {}, action: any) => {
+export const usersReducer = (state = {}, action: Action) => {
   switch(action.type){
     case FETCH_USERS:
       return {...state, ..._.mapKeys(action.payload, '_id')}

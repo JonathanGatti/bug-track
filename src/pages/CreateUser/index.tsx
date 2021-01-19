@@ -3,8 +3,15 @@ import { Form, Button, InputOnChangeData } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/usersActions';
 import { generateId } from '../../utils/generateId';
+import { Author } from '../../interfaces';
+import { History, LocationState } from 'history';
 
-const CreateUser = ({ history, createUser }: any) => {
+interface CreateUserProps {
+  history: History<LocationState>;
+  createUser: (user: Author) => void;
+}
+
+const CreateUser = ({ history, createUser }: CreateUserProps) => {
   const [name, setName] = useState('');
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,

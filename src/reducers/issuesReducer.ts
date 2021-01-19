@@ -4,10 +4,10 @@ import {Issue} from '../interfaces';
 
 interface Action {
   type: string,
-  payload: Issue[]
+  payload: any
 }
 
-export const issuesReducer = (state = {}, action: any) => {
+export const issuesReducer = (state = {}, action: Action) => {
   switch(action.type){
     case FETCH_ISSUES:
       return {...state, ..._.mapKeys(action.payload, '_id')}

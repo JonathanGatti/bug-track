@@ -4,9 +4,16 @@ import { connect } from 'react-redux';
 import VerticalHeader from '../../components/VerticalHeader';
 import List from '../../components/List';
 import { fetchIssues } from '../../actions/issuesActions';
+import { Issue } from '../../interfaces';
 import { fetchUsers } from '../../actions/usersActions';
 
-const HomePage = ({ fetchIssues, issues, fetchUsers }: any) => {
+interface HomePageProps {
+  fetchIssues: () => void;
+  issues: Issue[];
+  fetchUsers: () => void;
+}
+
+const HomePage = ({ fetchIssues, issues, fetchUsers }: HomePageProps) => {
   useEffect(() => {
     fetchIssues();
     fetchUsers();
@@ -19,7 +26,11 @@ const HomePage = ({ fetchIssues, issues, fetchUsers }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
+interface mapState {
+  issues: Issue[];
+}
+
+const mapStateToProps = (state: mapState) => {
   return { issues: Object.values(state.issues) };
 };
 

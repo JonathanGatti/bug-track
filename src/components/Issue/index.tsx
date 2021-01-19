@@ -3,11 +3,35 @@ import { Issue } from '../../interfaces';
 import { Table, Icon, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { deleteIssue } from '../../actions/issuesActions';
+import { History, LocationState } from 'history';
 
-const IssueDetail = ({ history, issue, deleteIssue }: any) => {
+interface IssueDetailProps {
+  history: History<LocationState>;
+  issue: Issue;
+  deleteIssue: (id: string) => void;
+}
+
+const IssueDetail = ({ history, issue, deleteIssue }: IssueDetailProps) => {
   const handleClick = (id: any) => {
     deleteIssue(id);
     history.push('/');
+  };
+
+  const renderButtons = (issue: Issue) => {
+    if (issue._id === undefined) {
+      return null;
+    } else {
+      return (
+        <>
+          <Button onClick={() => handleClick(issue._id)} inverted color="green">
+            Edit
+          </Button>
+          <Button onClick={() => handleClick(issue._id)} inverted color="red">
+            Delete
+          </Button>
+        </>
+      );
+    }
   };
   return (
     <>
@@ -50,12 +74,7 @@ const IssueDetail = ({ history, issue, deleteIssue }: any) => {
           <Table.Cell>{issue.description}</Table.Cell>
         </Table.Row>
       </Table>
-      <Button onClick={() => handleClick(issue._id)} inverted color="green">
-        Edit
-      </Button>
-      <Button onClick={() => handleClick(issue._id)} inverted color="red">
-        Delete
-      </Button>
+      {renderButtons(issue)}
     </>
   );
 };
