@@ -5,6 +5,7 @@ import { Table } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { UserButton } from '../../common/buttons';
 import List from '../List';
+import UsersList from '../UsersList';
 
 const Container = styled.div`
   display: flex;
@@ -27,18 +28,7 @@ const ProjectDetail = ({ project }: any) => {
                 <Table.HeaderCell>Team</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-            <Table.Body>
-              {project.teamMembers.map((member: any) => (
-                <Table.Row>
-                  <Table.Cell>{member.userName}</Table.Cell>
-                  <Table.Cell>
-                    <Link to={`/user/${member.userId}`}>
-                      <UserButton />
-                    </Link>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
+            <UsersList users={project.teamMembers} addUser={false} />
           </Table>
         </TableContainer>
       </Container>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { Form, Button, InputOnChangeData } from 'semantic-ui-react';
+import { Form, Button, InputOnChangeData, Table } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchIssues } from '../../actions/issuesActions';
 import { fetchUsers } from '../../actions/usersActions';
 import { createProject } from '../../actions/projectsActions';
 import { Author, Issue, Project } from '../../interfaces';
 import { generateId } from '../../utils/generateId';
+import UsersList from '../../components/UsersList';
 
 const CreateProject = ({
   history,
@@ -15,7 +16,7 @@ const CreateProject = ({
   users,
   createProject,
 }: any) => {
-  const [team, setTeams] = useState<Author[]>([]);
+  const [team, setTeam] = useState<Author[]>([]);
   const [name, setName] = useState('');
   const projectId = generateId();
 
@@ -33,7 +34,7 @@ const CreateProject = ({
 
   const handleClick = () => {
     const newProject: Project = {
-      teamMembers: users,
+      teamMembers: team,
       projectIssues: issues,
       projectId: projectId,
       projectName: name,
@@ -43,6 +44,9 @@ const CreateProject = ({
     createProject(newProject);
     history.push('/');
   };
+  const handleAddUser = (user: Author) => {
+    setTeam([...team, user]);
+  };
   return (
     <div>
       <Form>
@@ -50,11 +54,11 @@ const CreateProject = ({
           <label>First Name</label>
           <Form.Input onChange={handleChange} placeholder="First Name" />
         </Form.Field>
-
-        <Button onClick={handleClick} type="submit">
+        <Button color="blue" onClick={handleClick} type="submit">
           Submit
         </Button>
       </Form>
+      <UsersList users={users} addUser={true} onClick={handleAddUser} />
     </div>
   );
 };
