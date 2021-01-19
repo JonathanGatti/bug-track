@@ -6,6 +6,13 @@ import { Issue } from '../../interfaces';
 import { priorities } from '../../utils/priorities';
 import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  max-width: 60vw;
+  margin-right: auto;
+  margin-left: auto;
+`;
 
 interface CreateIssueProps {
   createIssue: (data: Issue) => void;
@@ -64,41 +71,43 @@ const CreateIssue = ({
   };
   return (
     <div>
-      <h2>Create Issue</h2>
-      <Form>
-        <Form.Field>
-          <label>Name</label>
-          <Form.Input onChange={handleNameChange} placeholder="Issue Name" />
-        </Form.Field>
-        <Form.Field>
-          <label>Description</label>
-          <Form.Input
-            onChange={handleDescriptionChange}
-            placeholder="Description"
-          />
-        </Form.Field>
-        {!_projectRef && (
+      <Container>
+        <h4>Add a new Issue</h4>
+        <Form>
           <Form.Field>
-            <label>Select a project reference</label>
-            <Dropdown
-              placeholder="Select A project Reference"
-              fluid
-              selection
-              options={projects}
-              onChange={handleProjectRefChange}
+            <label>Name</label>
+            <Form.Input onChange={handleNameChange} placeholder="Issue Name" />
+          </Form.Field>
+          <Form.Field>
+            <label>Description</label>
+            <Form.Input
+              onChange={handleDescriptionChange}
+              placeholder="Description"
             />
           </Form.Field>
-        )}
-        <Form.Field>
-          <label>Select the priority</label>
-          <Dropdown
-            placeholder="Select The Priority"
-            fluid
-            selection
-            options={priorities}
-            onChange={handlePriorityChange}
-          />
-        </Form.Field>
+          {!_projectRef && (
+            <Form.Field>
+              <label>Select a project reference</label>
+              <Dropdown
+                placeholder="Select A project Reference"
+                fluid
+                selection
+                options={projects}
+                onChange={handleProjectRefChange}
+              />
+            </Form.Field>
+          )}
+          <Form.Field>
+            <label>Select the priority</label>
+            <Dropdown
+              placeholder="Select The Priority"
+              fluid
+              selection
+              options={priorities}
+              onChange={handlePriorityChange}
+            />
+          </Form.Field>
+        </Form>
         {!_projectRef ? (
           <Button type="submit" color="blue" onClick={handleClick}>
             Submit
@@ -112,7 +121,7 @@ const CreateIssue = ({
             Add Issue
           </Button>
         )}
-      </Form>
+      </Container>
     </div>
   );
 };

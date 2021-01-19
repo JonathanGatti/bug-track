@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import List from '../List';
 import UsersList from '../UsersList';
+import { deleteProject } from '../../actions/projectsActions';
+import { connect } from 'react-redux';
 
 const Container = styled.div`
   display: flex;
@@ -13,17 +15,16 @@ const Container = styled.div`
 
 const TableContainer = styled.div``;
 
-const ProjectDetail = ({ project }: any) => {
+const ProjectDetail = ({ history, project, deleteProject }: any) => {
+  const handleClick = (id: string) => {
+    deleteProject(id);
+    history.push('/');
+  };
   return (
     <>
       <h2>{project.projectName}</h2>
       <Container>
         <List items={project.projectIssues} />
-        <Link to="/create/issue">
-          <Button inverted color="blue">
-            Add an Issue
-          </Button>
-        </Link>
         <TableContainer>
           <Table>
             <Table.Header>
@@ -35,8 +36,19 @@ const ProjectDetail = ({ project }: any) => {
           </Table>
         </TableContainer>
       </Container>
+      <Link to="/create/issue">
+        <Button inverted color="blue">
+          Add an Issue
+        </Button>
+      </Link>
+      <Button inverted color="green">
+        Edit Project
+      </Button>
+      <Button onClick={() => handleClick(project._id)} inverted color="red">
+        Delete
+      </Button>
     </>
   );
 };
 
-export default ProjectDetail;
+export default connect(null, { deleteProject })(ProjectDetail);

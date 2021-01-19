@@ -15,6 +15,7 @@ const IssueDetail = ({ history, issue, deleteIssue }: any) => {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell rowSpan="2">Id</Table.HeaderCell>
+            <Table.HeaderCell rowSpan="2">Project Ref</Table.HeaderCell>
             <Table.HeaderCell rowSpan="2">Author</Table.HeaderCell>
             <Table.HeaderCell colSpan="3">Status</Table.HeaderCell>
           </Table.Row>
@@ -27,6 +28,7 @@ const IssueDetail = ({ history, issue, deleteIssue }: any) => {
         <Table.Body>
           <Table.Row>
             <Table.Cell>{issue.issueId}</Table.Cell>
+            <Table.Cell>{issue.project}</Table.Cell>
             <Table.Cell>{issue.author}</Table.Cell>
             <Table.Cell textAlign="center">
               {issue.active ? (
@@ -47,12 +49,13 @@ const IssueDetail = ({ history, issue, deleteIssue }: any) => {
         <Table.Row>
           <Table.Cell>{issue.description}</Table.Cell>
         </Table.Row>
-        <Table.Cell>
-          <Button onClick={() => handleClick(issue._id)} inverted color="red">
-            Delete
-          </Button>
-        </Table.Cell>
       </Table>
+      <Button onClick={() => handleClick(issue._id)} inverted color="green">
+        Edit
+      </Button>
+      <Button onClick={() => handleClick(issue._id)} inverted color="red">
+        Delete
+      </Button>
     </>
   );
 };

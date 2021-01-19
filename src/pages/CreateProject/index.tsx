@@ -12,7 +12,10 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  max-width: 60vw;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const CreateProject = ({
@@ -85,13 +88,13 @@ const CreateProject = ({
             <label>Project Name</label>
             <Form.Input onChange={handleChange} placeholder="First Name" />
           </Form.Field>
+          <Button color="blue" onClick={handleClick} type="submit">
+            Submit
+          </Button>
         </Form>
         <UsersList users={users} addUser={true} onClick={handleAddUser} />
       </Container>
       <CreateIssue _projectRef={projectId} onAddIssue={handleAddIssue} />
-      <Button color="blue" onClick={handleClick} type="submit">
-        Submit
-      </Button>
     </div>
   );
 };

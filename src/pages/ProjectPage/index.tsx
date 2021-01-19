@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { fetchProject } from '../../actions/projectsActions';
 import Spinner from '../../common/spinner';
 
-const ProjectPage = ({ match, fetchProject, project }: any) => {
+const ProjectPage = ({ history, match, fetchProject, project }: any) => {
   useEffect(() => {
     fetchProject(match.params.id);
   }, [project]);
@@ -14,7 +14,7 @@ const ProjectPage = ({ match, fetchProject, project }: any) => {
     if (!project) {
       return <Spinner />;
     } else {
-      return <ProjectDetail project={project} />;
+      return <ProjectDetail project={project} history={history} />;
     }
   };
   return <div>{render()}</div>;
