@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createIssue } from '../../actions/issuesActions';
+import { fetchProjects } from '../../actions/projectsActions';
 import { Issue } from '../../interfaces';
-import { projects } from '../../utils/fakeData';
 import { priorities } from '../../utils/priorities';
 import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
@@ -11,12 +11,23 @@ interface CreateIssueProps {
   createIssue: (data: Issue) => void;
 }
 
-const CreateIssue = ({ history, createIssue }: any) => {
+const CreateIssue = ({
+  history,
+  createIssue,
+  fetchProjects,
+  projects,
+  _projectRef,
+  onAddIssue,
+}: any) => {
   const author = 'gino@hotmail.com';
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<any>('');
+
+  useEffect(() => {
+    fetchProjects();
+  }, [projects.length]);
 
   const handleClick = () => {
     const newIssue = {
@@ -60,22 +71,26 @@ const CreateIssue = ({ history, createIssue }: any) => {
           <Form.Input onChange={handleNameChange} placeholder="Issue Name" />
         </Form.Field>
         <Form.Field>
-          <label>Issue Description</label>
+          <label>Description</label>
           <Form.Input
             onChange={handleDescriptionChange}
             placeholder="Description"
           />
         </Form.Field>
+        {!_projectRef && (
+          <Form.Field>
+            <label>Select a project reference</label>
+            <Dropdown
+              placeholder="Select A project Reference"
+              fluid
+              selection
+              options={projects}
+              onChange={handleProjectRefChange}
+            />
+          </Form.Field>
+        )}
         <Form.Field>
-          <Dropdown
-            placeholder="Select A project Reference"
-            fluid
-            selection
-            options={projects}
-            onChange={handleProjectRefChange}
-          />
-        </Form.Field>
-        <Form.Field>
+          <label>Select the priority</label>
           <Dropdown
             placeholder="Select The Priority"
             fluid
@@ -84,12 +99,27 @@ const CreateIssue = ({ history, createIssue }: any) => {
             onChange={handlePriorityChange}
           />
         </Form.Field>
-        <Button type="submit" color="blue" onClick={handleClick}>
-          Submit
-        </Button>
+        {!_projectRef ? (
+          <Button type="submit" color="blue" onClick={handleClick}>
+            Submit
+          </Button>
+        ) : (
+          <Button
+            onClick={() => onAddIssue(issueName, description, priority)}
+            inverted
+            color="blue"
+          >
+            Add Issue
+          </Button>
+        )}
       </Form>
     </div>
   );
 };
 
-export default connect(null, { createIssue })(CreateIssue);
+const mapStateToProps = (state: any) => {
+  return { projects: Object.values(state.projects) };
+};
+export default connect(mapStateToProps, { createIssue, fetchProjects })(
+  CreateIssue
+);

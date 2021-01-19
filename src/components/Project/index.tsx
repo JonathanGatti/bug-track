@@ -1,10 +1,9 @@
 import React from 'react';
+import { Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { Project } from '../../interfaces';
-import { Table } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { UserButton } from '../../common/buttons';
 import List from '../List';
+import UsersList from '../UsersList';
 
 const Container = styled.div`
   display: flex;
@@ -14,12 +13,17 @@ const Container = styled.div`
 
 const TableContainer = styled.div``;
 
-const ProjectDetail = (project: Project) => {
+const ProjectDetail = ({ project }: any) => {
   return (
     <>
       <h2>{project.projectName}</h2>
       <Container>
-        <List items={project.issues} />
+        <List items={project.projectIssues} />
+        <Link to="/create/issue">
+          <Button inverted color="blue">
+            Add an Issue
+          </Button>
+        </Link>
         <TableContainer>
           <Table>
             <Table.Header>
@@ -27,18 +31,7 @@ const ProjectDetail = (project: Project) => {
                 <Table.HeaderCell>Team</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
-            <Table.Body>
-              {project.teamMembers.map((member) => (
-                <Table.Row>
-                  <Table.Cell>{member.userName}</Table.Cell>
-                  <Table.Cell>
-                    <Link to={`/user/${member.userId}`}>
-                      <UserButton />
-                    </Link>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
+            <UsersList users={project.teamMembers} addUser={false} />
           </Table>
         </TableContainer>
       </Container>
