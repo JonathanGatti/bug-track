@@ -43,7 +43,7 @@ const CreateProject = ({
   const handleClick = () => {
     const newProject: Project = {
       teamMembers: team,
-      projectIssues: issues,
+      projectIssues: _issues,
       projectId: projectId,
       projectName: name,
       text: name,
@@ -54,7 +54,6 @@ const CreateProject = ({
   };
   const handleAddUser = (user: Author) => {
     setTeam([...team, user]);
-    console.log(team);
   };
   const handleAddIssue = (name: string, desc: string, priority: string) => {
     const newIssue = {
@@ -66,16 +65,15 @@ const CreateProject = ({
       active: true,
       priority: priority,
     };
-    const printCreateIssue = async () => {
+    const setNewIssue = async () => {
       await createIssue(newIssue);
       const res = await fetchIssues();
-      console.log(res);
       const newIssues = res.filter(
         (issue: Issue) => issue.project === newIssue.project
       );
-      setIssues([_issues, ...newIssues]);
+      setIssues([...newIssues]);
     };
-    printCreateIssue();
+    setNewIssue();
   };
 
   return (
