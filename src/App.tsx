@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AppContainer } from './styles/styledComponents';
 import HomePage from './pages/HomePage';

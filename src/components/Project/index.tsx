@@ -1,9 +1,7 @@
 import React from 'react';
+import { Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { Project } from '../../interfaces';
-import { Table } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { UserButton } from '../../common/buttons';
 import List from '../List';
 import UsersList from '../UsersList';
 
@@ -21,6 +19,11 @@ const ProjectDetail = ({ project }: any) => {
       <h2>{project.projectName}</h2>
       <Container>
         <List items={project.projectIssues} />
+        <Link to="/create/issue">
+          <Button inverted color="blue">
+            Add an Issue
+          </Button>
+        </Link>
         <TableContainer>
           <Table>
             <Table.Header>

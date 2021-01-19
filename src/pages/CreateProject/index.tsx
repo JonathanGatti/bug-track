@@ -1,18 +1,19 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { Form, Button, InputOnChangeData, Table } from 'semantic-ui-react';
+import { Form, Button, InputOnChangeData } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../../actions/usersActions';
 import { createProject } from '../../actions/projectsActions';
-import {
-  createIssue,
-  fetchIssue,
-  fetchIssues,
-} from '../../actions/issuesActions';
+import { createIssue, fetchIssues } from '../../actions/issuesActions';
 import { Author, Issue, Project } from '../../interfaces';
 import { generateId } from '../../utils/generateId';
 import UsersList from '../../components/UsersList';
 import CreateIssue from '../CreateIssue';
-import { postIssue } from '../../api/issues/issuesRoutes';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
 const CreateProject = ({
   history,
@@ -78,17 +79,19 @@ const CreateProject = ({
 
   return (
     <div>
-      <Form>
-        <Form.Field>
-          <label>Project Name</label>
-          <Form.Input onChange={handleChange} placeholder="First Name" />
-        </Form.Field>
-        <Button color="blue" onClick={handleClick} type="submit">
-          Submit
-        </Button>
-      </Form>
-      <UsersList users={users} addUser={true} onClick={handleAddUser} />
+      <Container>
+        <Form>
+          <Form.Field>
+            <label>Project Name</label>
+            <Form.Input onChange={handleChange} placeholder="First Name" />
+          </Form.Field>
+        </Form>
+        <UsersList users={users} addUser={true} onClick={handleAddUser} />
+      </Container>
       <CreateIssue _projectRef={projectId} onAddIssue={handleAddIssue} />
+      <Button color="blue" onClick={handleClick} type="submit">
+        Submit
+      </Button>
     </div>
   );
 };
