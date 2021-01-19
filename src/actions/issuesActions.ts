@@ -6,6 +6,7 @@ import {Dispatch} from 'redux';
 export const fetchIssues = () => async (dispatch: Dispatch) => {
   const res = await getIssues();
   dispatch({type: FETCH_ISSUES, payload: res})
+  return res;
   }
 
 export const fetchIssue = (id: string) => async (dispatch: Dispatch) => {
@@ -16,6 +17,7 @@ export const fetchIssue = (id: string) => async (dispatch: Dispatch) => {
 export const createIssue = (data: Issue) => async (dispatch: Dispatch) => {
     const res = await postIssue(data);
     dispatch({type: CREATE_ISSUE, payload: res})
+    return res;
   }
 
 export const editIssue = (data: Issue) => async (dispatch: Dispatch) => {

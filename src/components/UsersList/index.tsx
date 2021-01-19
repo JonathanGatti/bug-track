@@ -7,14 +7,14 @@ import { Button } from 'semantic-ui-react';
 const UsersList = ({ users, addUser, onClick }: any) => {
   return (
     <Table.Body>
-      {users.map((member: any) => (
+      {users.map((user: any) => (
         <Table.Row>
-          <Table.Cell>{member.userName}</Table.Cell>
+          <Table.Cell>{user.userName}</Table.Cell>
           <Table.Cell>
             {addUser ? (
-              <Button onClick={onClick}>Add User</Button>
+              <Button onClick={() => onClick(user)}>Add User</Button>
             ) : (
-              <Link to={`/user/${member.userId}`}>
+              <Link to={`/user/${user.userId}`}>
                 <UserButton />
               </Link>
             )}

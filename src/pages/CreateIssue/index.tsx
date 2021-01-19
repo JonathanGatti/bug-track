@@ -16,6 +16,8 @@ const CreateIssue = ({
   createIssue,
   fetchProjects,
   projects,
+  _projectRef,
+  onAddIssue,
 }: any) => {
   const author = 'gino@hotmail.com';
   const [issueName, setIssueName] = useState('');
@@ -75,16 +77,18 @@ const CreateIssue = ({
             placeholder="Description"
           />
         </Form.Field>
-        <Form.Field>
-          <label>Select a project reference</label>
-          <Dropdown
-            placeholder="Select A project Reference"
-            fluid
-            selection
-            options={projects}
-            onChange={handleProjectRefChange}
-          />
-        </Form.Field>
+        {!_projectRef && (
+          <Form.Field>
+            <label>Select a project reference</label>
+            <Dropdown
+              placeholder="Select A project Reference"
+              fluid
+              selection
+              options={projects}
+              onChange={handleProjectRefChange}
+            />
+          </Form.Field>
+        )}
         <Form.Field>
           <label>Select the priority</label>
           <Dropdown
@@ -95,9 +99,19 @@ const CreateIssue = ({
             onChange={handlePriorityChange}
           />
         </Form.Field>
-        <Button type="submit" color="blue" onClick={handleClick}>
-          Submit
-        </Button>
+        {!_projectRef ? (
+          <Button type="submit" color="blue" onClick={handleClick}>
+            Submit
+          </Button>
+        ) : (
+          <Button
+            onClick={() => onAddIssue(issueName, description, priority)}
+            inverted
+            color="blue"
+          >
+            Add Issue
+          </Button>
+        )}
       </Form>
     </div>
   );
