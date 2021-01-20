@@ -3,13 +3,14 @@ import { Form, Button, InputOnChangeData } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { logIn } from '../../api/users/usersRoutes';
 import { History, LocationState } from 'history';
+import { logInUser } from '../../actions/currentUserActions';
 
 interface LogInPageProps {
   history: History<LocationState>;
   logInUser: any;
 }
 
-const LogInPage = () => {
+const LogInPage = ({ logInUser }: any) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -35,7 +36,7 @@ const LogInPage = () => {
     if (res!.data === 'Not Allowed') {
       alert(res!.data);
     } else {
-      alert(res!.data);
+      logInUser(res!.data);
     }
   };
   return (
@@ -62,4 +63,4 @@ const LogInPage = () => {
   );
 };
 
-export default connect(null)(LogInPage);
+export default connect(null, { logInUser })(LogInPage);
