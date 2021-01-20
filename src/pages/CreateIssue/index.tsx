@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { mapState } from './interfaces';
 import { createIssue } from '../../actions/issuesActions';
@@ -45,13 +46,17 @@ const CreateIssue = ({
       priority: priority,
     };
     const res = await createIssue(newIssue);
-    setCurrentProject({
-      ...currentProject,
-      projectIssues: [...currentProject.projectIssues, res],
-    });
+    if (!_.isEmpty(currentProject)) {
+      setCurrentProject({
+        ...currentProject,
+        projectIssues: [...currentProject.projectIssues, res],
+      });
+    }
   };
   const handleSubmit = () => {
-    editProject(currentProject._id, currentProject);
+    if (!_.isEmpty(currentProject)) {
+      editProject(currentProject._id, currentProject);
+    }
     history.push('/');
   };
 
