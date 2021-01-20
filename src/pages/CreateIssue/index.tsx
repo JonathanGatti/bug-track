@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { mapState } from './interfaces';
 import { createIssue } from '../../actions/issuesActions';
-import { fetchProjects } from '../../actions/projectsActions';
+import { fetchProjects, editProject } from '../../actions/projectsActions';
 import { priorities } from '../../utils/priorities';
 import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
@@ -18,6 +18,7 @@ const CreateIssue = ({
   history,
   createIssue,
   fetchProjects,
+  editProject,
   projects,
   _projectRef,
   onAddIssue,
@@ -25,6 +26,7 @@ const CreateIssue = ({
 }: any) => {
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');
+  const [currentProject, setCurrentProject] = useState<any>({});
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<any>('');
 
@@ -32,7 +34,7 @@ const CreateIssue = ({
     fetchProjects();
   }, [projects.length]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const newIssue = {
       issueName: issueName,
       issueId: generateId(),
@@ -42,12 +44,21 @@ const CreateIssue = ({
       active: true,
       priority: priority,
     };
-    createIssue(newIssue);
+    const res = await createIssue(newIssue);
+    setCurrentProject({
+      ...currentProject,
+      projectIssues: [...currentProject.projectIssues, res],
+    });
+  };
+  const handleSubmit = () => {
+    editProject(currentProject._id, currentProject);
     history.push('/');
   };
+
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIssueName(e.target.value);
   };
+
   const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDescription(e.target.value);
   };
@@ -57,6 +68,14 @@ const CreateIssue = ({
     data: DropdownProps
   ) => {
     setProjectRef(data.value);
+    if (!data.options) return null;
+    if (data.options) {
+      const projects = data.options;
+      const selectedProject = projects?.filter((project: any) => {
+        return project.value === data.value;
+      });
+      setCurrentProject(selectedProject![0]);
+    }
   };
 
   const handlePriorityChange = (
@@ -105,9 +124,14 @@ const CreateIssue = ({
           </Form.Field>
         </Form>
         {!_projectRef ? (
-          <Button type="submit" color="blue" onClick={handleClick}>
-            Submit
-          </Button>
+          <>
+            <Button type="submit" inverted color="blue" onClick={handleClick}>
+              Create Issue
+            </Button>
+            <Button type="submit" color="blue" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </>
         ) : (
           <Button
             onClick={() => onAddIssue(issueName, description, priority)}
@@ -128,6 +152,8 @@ const mapStateToProps = (state: mapState) => {
     currentUser: state.currentUser,
   };
 };
-export default connect(mapStateToProps, { createIssue, fetchProjects })(
-  CreateIssue
-);
+export default connect(mapStateToProps, {
+  createIssue,
+  fetchProjects,
+  editProject,
+})(CreateIssue);

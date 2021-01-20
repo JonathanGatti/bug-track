@@ -32,9 +32,9 @@ export const postProject = async (data: Project) => {
   }
 };
 
-export const patchProject = async (data: Project) => {
+export const patchProject = async (id: string, data: any) => {
   try {
-    let res = await projects.patch(`/projects/${data._id}`);
+    let res = await projects.patch(`/projects/${id}`, data);
     return res.data;
   } catch (err) {
     console.log(err);

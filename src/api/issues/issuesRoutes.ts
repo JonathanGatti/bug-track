@@ -20,14 +20,14 @@ export const getIssue = async (id: string) => {
 }
 export const postIssue = async (data: Issue) => {
   try {
-    issues.post('/issues', 
+    const res = await issues.post('/issues', 
     data
     ,{
       headers: {
         'Content-Type': 'application/json',
       }
     }) 
-    return data;
+    return res.data;
     }catch(err){
       console.log(err);
   }

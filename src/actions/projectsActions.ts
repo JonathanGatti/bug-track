@@ -18,8 +18,8 @@ export const createProject = (data: Project) => async (dispatch: Dispatch) => {
   dispatch({type: CREATE_PROJECT, payload: res})
 }
 
-export const editProject = (data: Project) => async (dispatch: Dispatch) => {
-  const res = await patchProject(data)
+export const editProject = (id: string, data: any) => async (dispatch: Dispatch) => {
+  const res = await patchProject(id, data)
   dispatch({type: EDIT_PROJECT, payload: res})
 }
 
