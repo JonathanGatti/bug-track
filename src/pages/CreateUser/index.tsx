@@ -6,13 +6,15 @@ import { generateId } from '../../utils/generateId';
 import { Author } from '../../interfaces';
 import { History, LocationState } from 'history';
 import UserForm from '../../components/UserForm';
+import LogInWarning from '../../common/logInWarning';
 
 interface CreateUserProps {
   history: History<LocationState>;
   createUser: (user: Author) => void;
+  currentUser: any;
 }
 
-const CreateUser = ({ history, createUser }: CreateUserProps) => {
+const CreateUser = ({ history, createUser, currentUser }: CreateUserProps) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const handleNameChange = (
@@ -36,16 +38,26 @@ const CreateUser = ({ history, createUser }: CreateUserProps) => {
     createUser(newUser);
     history.push('/');
   };
-  return (
-    <div>
-      <h2>Create user</h2>
-      <UserForm
-        onNameChange={handleNameChange}
-        onPasswordChange={handlePasswordChange}
-        onClick={handleClick}
-      />
-    </div>
-  );
+  const render = () => {
+    if (!currentUser) return null;
+    if (!currentUser.isSignedIn) return <LogInWarning />;
+    else {
+      return (
+        <>
+          <h2>Create user</h2>
+          <UserForm
+            onNameChange={handleNameChange}
+            onPasswordChange={handlePasswordChange}
+            onClick={handleClick}
+          />
+        </>
+      );
+    }
+  };
+  return <div>{render()}</div>;
 };
 
-export default connect(null, { createUser })(CreateUser);
+const mapStateToProps = (state: any) => {
+  return { currentUser: state.currentUser };
+};
+export default connect(mapStateToProps, { createUser })(CreateUser);

@@ -8,6 +8,7 @@ import { priorities } from '../../utils/priorities';
 import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
 import styled from 'styled-components';
+import LogInWarning from '../../common/logInWarning';
 
 const Container = styled.div`
   max-width: 60vw;
@@ -30,7 +31,7 @@ const CreateIssue = ({
   const [currentProject, setCurrentProject] = useState<any>({});
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<any>('');
-
+  console.log(_projectRef);
   useEffect(() => {
     fetchProjects();
   }, [projects.length]);
@@ -89,66 +90,75 @@ const CreateIssue = ({
   ) => {
     setPriority(data.value);
   };
-  return (
-    <div>
-      <Container>
-        <h4>Add a new Issue</h4>
-        <Form>
-          <Form.Field>
-            <label>Name</label>
-            <Form.Input onChange={handleNameChange} placeholder="Issue Name" />
-          </Form.Field>
-          <Form.Field>
-            <label>Description</label>
-            <Form.Input
-              onChange={handleDescriptionChange}
-              placeholder="Description"
-            />
-          </Form.Field>
-          {!_projectRef && (
+
+  const render = () => {
+    if (!currentUser) return null;
+    if (!currentUser.isSignedIn) return <LogInWarning />;
+    else {
+      return (
+        <Container>
+          <h4>Add a new Issue</h4>
+          <Form>
             <Form.Field>
-              <label>Select a project reference</label>
-              <Dropdown
-                placeholder="Select A project Reference"
-                fluid
-                selection
-                options={projects}
-                onChange={handleProjectRefChange}
+              <label>Name</label>
+              <Form.Input
+                onChange={handleNameChange}
+                placeholder="Issue Name"
               />
             </Form.Field>
+            <Form.Field>
+              <label>Description</label>
+              <Form.Input
+                onChange={handleDescriptionChange}
+                placeholder="Description"
+              />
+            </Form.Field>
+            {!_projectRef && (
+              <Form.Field>
+                <label>Select a project reference</label>
+                <Dropdown
+                  placeholder="Select A project Reference"
+                  fluid
+                  selection
+                  options={projects}
+                  onChange={handleProjectRefChange}
+                />
+              </Form.Field>
+            )}
+            <Form.Field>
+              <label>Select the priority</label>
+              <Dropdown
+                placeholder="Select The Priority"
+                fluid
+                selection
+                options={priorities}
+                onChange={handlePriorityChange}
+              />
+            </Form.Field>
+          </Form>
+          {!_projectRef ? (
+            <>
+              <Button type="submit" inverted color="blue" onClick={handleClick}>
+                Create Issue
+              </Button>
+              <Button type="submit" color="blue" onClick={handleSubmit}>
+                Submit
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={() => onAddIssue(issueName, description, priority)}
+              inverted
+              color="blue"
+            >
+              Add Issue
+            </Button>
           )}
-          <Form.Field>
-            <label>Select the priority</label>
-            <Dropdown
-              placeholder="Select The Priority"
-              fluid
-              selection
-              options={priorities}
-              onChange={handlePriorityChange}
-            />
-          </Form.Field>
-        </Form>
-        {!_projectRef ? (
-          <>
-            <Button type="submit" inverted color="blue" onClick={handleClick}>
-              Create Issue
-            </Button>
-            <Button type="submit" color="blue" onClick={handleSubmit}>
-              Submit
-            </Button>
-          </>
-        ) : (
-          <Button
-            onClick={() => onAddIssue(issueName, description, priority)}
-            inverted
-            color="blue"
-          >
-            Add Issue
-          </Button>
-        )}
-      </Container>
-    </div>
-  );
+        </Container>
+      );
+    }
+  };
+  return <div>{render()}</div>;
 };
 
 const mapStateToProps = (state: mapState) => {

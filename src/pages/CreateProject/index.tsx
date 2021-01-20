@@ -9,6 +9,7 @@ import { generateId } from '../../utils/generateId';
 import UsersList from '../../components/UsersList';
 import CreateIssue from '../CreateIssue';
 import styled from 'styled-components';
+import LogInWarning from '../../common/logInWarning';
 
 const Container = styled.div`
   display: flex;
@@ -80,24 +81,30 @@ const CreateProject = ({
     };
     setNewIssue();
   };
-
-  return (
-    <div>
-      <Container>
-        <Form>
-          <Form.Field>
-            <label>Project Name</label>
-            <Form.Input onChange={handleChange} placeholder="First Name" />
-          </Form.Field>
-          <Button color="blue" onClick={handleClick} type="submit">
-            Submit
-          </Button>
-        </Form>
-        <UsersList users={users} addUser={true} onClick={handleAddUser} />
-      </Container>
-      <CreateIssue _projectRef={projectName} onAddIssue={handleAddIssue} />
-    </div>
-  );
+  const render = () => {
+    if (!currentUser) return null;
+    if (!currentUser.isSignedin) return <LogInWarning />;
+    else {
+      return (
+        <>
+          <Container>
+            <Form>
+              <Form.Field>
+                <label>Project Name</label>
+                <Form.Input onChange={handleChange} placeholder="First Name" />
+              </Form.Field>
+              <Button color="blue" onClick={handleClick} type="submit">
+                Submit
+              </Button>
+            </Form>
+            <UsersList users={users} addUser={true} onClick={handleAddUser} />
+          </Container>
+          <CreateIssue _projectRef={projectName} onAddIssue={handleAddIssue} />
+        </>
+      );
+    }
+  };
+  return <div>{render()}</div>;
 };
 
 const mapStateToProps = (state: any) => {
