@@ -1,30 +1,18 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
-import { RouteComponentProps, StaticContext } from 'react-router';
 import { connect } from 'react-redux';
-import { Project } from '../../interfaces';
+import { mapState } from './interfaces';
 import { createIssue } from '../../actions/issuesActions';
 import { fetchProjects } from '../../actions/projectsActions';
-import { Issue } from '../../interfaces';
 import { priorities } from '../../utils/priorities';
 import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
 import styled from 'styled-components';
-import { History, LocationState } from 'history';
 
 const Container = styled.div`
   max-width: 60vw;
   margin-right: auto;
   margin-left: auto;
 `;
-
-interface CreateIssueProps {
-  history: History<LocationState | any>;
-  createIssue: (data: Issue) => void;
-  fetchProjects: () => void;
-  projects: Project[];
-  _projectRef: string;
-  onAddIssue: (issueName: string, desc: string, priority: any) => void;
-}
 
 const CreateIssue = ({
   history,
@@ -133,16 +121,6 @@ const CreateIssue = ({
     </div>
   );
 };
-
-interface CurrentUser {
-  isSignedIn: boolean;
-  userId: string;
-}
-
-interface mapState {
-  projects: Project[];
-  currentUser: CurrentUser;
-}
 
 const mapStateToProps = (state: mapState) => {
   return {

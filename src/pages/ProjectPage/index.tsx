@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StaticContext, RouteComponentProps } from 'react-router';
 import ProjectDetail from '../../components/ProjectDetail';
 import { Project } from '../../interfaces';

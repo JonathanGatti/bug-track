@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AppContainer } from './styles/styledComponents';
 import HomePage from './pages/HomePage';
@@ -49,7 +49,11 @@ function App() {
           path="/create/user"
           render={(routeProps) => <CreateUser {...routeProps} />}
         />
-        <Route exact path="/login" render={(routeProps) => <LogInPage />} />
+        <Route
+          exact
+          path="/login"
+          render={(routeProps) => <LogInPage {...routeProps} />}
+        />
       </Switch>
     </AppContainer>
   );

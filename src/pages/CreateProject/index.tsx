@@ -26,6 +26,7 @@ const CreateProject = ({
   users,
   createProject,
   createIssue,
+  currentUser,
 }: any) => {
   const [team, setTeam] = useState<Author[]>([]);
   const [_issues, setIssues] = useState<Issue[]>([]);
@@ -63,7 +64,7 @@ const CreateProject = ({
     const newIssue = {
       issueName: name,
       issueId: generateId(),
-      author: 'franco@gmail.com',
+      author: currentUser.userName,
       project: projectName,
       description: desc,
       active: true,
@@ -103,6 +104,7 @@ const mapStateToProps = (state: any) => {
   return {
     issues: Object.values(state.issues),
     users: Object.values(state.users),
+    currentUser: state.currentUser,
   };
 };
 export default connect(mapStateToProps, {

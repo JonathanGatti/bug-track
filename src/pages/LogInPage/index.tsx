@@ -1,19 +1,20 @@
 import React, { useState, ChangeEvent } from 'react';
-import { Form, Button, InputOnChangeData } from 'semantic-ui-react';
+import { InputOnChangeData } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { logIn } from '../../api/users/usersRoutes';
 import { History, LocationState } from 'history';
 import { logInUser } from '../../actions/currentUserActions';
+import UserForm from '../../components/UserForm';
+import { CurrentUser } from '../../interfaces';
 
 interface LogInPageProps {
   history: History<LocationState>;
-  logInUser: any;
+  logInUser: (currentUser: CurrentUser) => void;
 }
 
-const LogInPage = ({ logInUser }: any) => {
+const LogInPage = ({ history, logInUser }: LogInPageProps) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const handleNameChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -35,7 +36,7 @@ const LogInPage = ({ logInUser }: any) => {
     const res = await logIn(credentials);
     if (!res!.data) return null;
     if (res!.data === 'Not Allowed') {
-      alert(res!.data);
+      alert('Incorret Username or Password');
     } else {
       const currentUser = {
         userId: res!.data,
@@ -47,23 +48,11 @@ const LogInPage = ({ logInUser }: any) => {
   return (
     <div>
       <h2>Log In</h2>
-      <Form>
-        <Form.Field>
-          <label>First Name</label>
-          <Form.Input onChange={handleNameChange} placeholder="User Name" />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <Form.Input
-            onChange={handlePasswordChange}
-            placeholder="Password"
-            type="password"
-          />
-        </Form.Field>
-        <Button onClick={handleClick} type="submit" color="blue">
-          Submit
-        </Button>
-      </Form>
+      <UserForm
+        onNameChange={handleNameChange}
+        onPasswordChange={handlePasswordChange}
+        onClick={handleClick}
+      />
     </div>
   );
 };

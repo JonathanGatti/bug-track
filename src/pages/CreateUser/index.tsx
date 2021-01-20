@@ -1,10 +1,11 @@
 import React, { useState, ChangeEvent } from 'react';
-import { Form, Button, InputOnChangeData } from 'semantic-ui-react';
+import { InputOnChangeData } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/usersActions';
 import { generateId } from '../../utils/generateId';
 import { Author } from '../../interfaces';
 import { History, LocationState } from 'history';
+import UserForm from '../../components/UserForm';
 
 interface CreateUserProps {
   history: History<LocationState>;
@@ -38,23 +39,11 @@ const CreateUser = ({ history, createUser }: CreateUserProps) => {
   return (
     <div>
       <h2>Create user</h2>
-      <Form>
-        <Form.Field>
-          <label>First Name</label>
-          <Form.Input onChange={handleNameChange} placeholder="User Name" />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <Form.Input
-            onChange={handlePasswordChange}
-            placeholder="Password"
-            type="password"
-          />
-        </Form.Field>
-        <Button onClick={handleClick} type="submit" color="blue">
-          Submit
-        </Button>
-      </Form>
+      <UserForm
+        onNameChange={handleNameChange}
+        onPasswordChange={handlePasswordChange}
+        onClick={handleClick}
+      />
     </div>
   );
 };

@@ -28,3 +28,8 @@ export interface Author {
   userPassword: string;
 }
 
+export interface CurrentUser {
+  isSignedIn?: boolean;
+  userId: string;
+  userName: string;
+}
