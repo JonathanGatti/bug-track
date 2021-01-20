@@ -5,7 +5,7 @@ import { Issue } from '../../interfaces';
 
 const RenderIssues = ({ list }: any) => {
   return (
-    <>
+    <Table definition>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Issue Name</Table.HeaderCell>
@@ -30,7 +30,7 @@ const RenderIssues = ({ list }: any) => {
           </Table.Row>
         ))}
       </Table.Body>
-    </>
+    </Table>
   );
 };
 

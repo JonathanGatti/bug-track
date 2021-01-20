@@ -6,6 +6,7 @@ import { Project, Issue } from '../../interfaces';
 import RenderIssues from '../RenderIssues';
 import RenderProjects from '../RenderProjects';
 import Spinner from '../../common/spinner';
+import NoContentWarning from '../../common/noContentWarning';
 
 const ListContainer = styled.div`
   width: 70vw;
@@ -18,19 +19,16 @@ interface ListProps {
 
 const List = ({ items }: any) => {
   const render = () => {
+    if (!items) return <Spinner />;
     if (!items[0]) {
-      return <Spinner />;
+      return <NoContentWarning />;
     } else if (items[0].projectId) {
       return <RenderProjects list={items} />;
     } else {
       return <RenderIssues list={items} />;
     }
   };
-  return (
-    <ListContainer>
-      <Table definition>{render()}</Table>
-    </ListContainer>
-  );
+  return <ListContainer>{render()}</ListContainer>;
 };
 
 export default List;

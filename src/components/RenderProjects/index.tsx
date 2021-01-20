@@ -5,7 +5,7 @@ import { Table, Button } from 'semantic-ui-react';
 
 const RenderProjects = ({ list }: any) => {
   return (
-    <>
+    <Table definition>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Project id</Table.HeaderCell>
@@ -28,7 +28,7 @@ const RenderProjects = ({ list }: any) => {
           </Table.Row>
         ))}
       </Table.Body>
-    </>
+    </Table>
   );
 };
 

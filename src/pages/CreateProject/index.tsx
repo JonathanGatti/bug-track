@@ -83,7 +83,7 @@ const CreateProject = ({
   };
   const render = () => {
     if (!currentUser) return null;
-    if (!currentUser.isSignedin) return <LogInWarning />;
+    if (!currentUser.isSignedIn) return <LogInWarning />;
     else {
       return (
         <>
