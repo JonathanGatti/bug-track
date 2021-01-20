@@ -6,6 +6,7 @@ import { History, LocationState } from 'history';
 import { logInUser } from '../../actions/currentUserActions';
 import UserForm from '../../components/UserForm';
 import { CurrentUser } from '../../interfaces';
+import ModalTemplate from '../../components/Modal';
 
 interface LogInPageProps {
   history: History<LocationState>;
@@ -15,6 +16,7 @@ interface LogInPageProps {
 const LogInPage = ({ history, logInUser }: LogInPageProps) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleNameChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -34,20 +36,26 @@ const LogInPage = ({ history, logInUser }: LogInPageProps) => {
       userPassword: password,
     };
     const res = await logIn(credentials);
-    if (!res!.data) return null;
-    if (res!.data === 'Not Allowed') {
-      alert('Incorret Username or Password');
+    if (!res || res!.data === 'Not Allowed') {
+      setIsOpen(true);
+      return;
     } else {
       const currentUser = {
         userId: res!.data,
         userName: credentials.userName,
       };
       logInUser(currentUser);
+      history.push('/');
     }
   };
   return (
     <div>
       <h2>Log In</h2>
+      <ModalTemplate
+        open={isOpen}
+        content="Incorrect username or password"
+        onOpen={setIsOpen}
+      />
       <UserForm
         onNameChange={handleNameChange}
         onPasswordChange={handlePasswordChange}

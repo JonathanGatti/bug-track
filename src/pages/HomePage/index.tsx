@@ -6,6 +6,11 @@ import List from '../../components/List';
 import { fetchIssues } from '../../actions/issuesActions';
 import { Issue } from '../../interfaces';
 import { fetchUsers } from '../../actions/usersActions';
+import {
+  deleteAllUsers,
+  deleteAllProjects,
+  deleteAllIssues,
+} from '../../utils/database';
 
 interface HomePageProps {
   fetchIssues: () => void;
