@@ -33,8 +33,8 @@ const CreateIssue = ({
   projects,
   _projectRef,
   onAddIssue,
+  currentUser,
 }: any) => {
-  const author = 'gino@hotmail.com';
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');
   const [description, setDescription] = useState('');
@@ -48,7 +48,7 @@ const CreateIssue = ({
     const newIssue = {
       issueName: issueName,
       issueId: generateId(),
-      author: author,
+      author: currentUser.userName,
       project: projectRef,
       description: description,
       active: true,
@@ -134,12 +134,21 @@ const CreateIssue = ({
   );
 };
 
+interface CurrentUser {
+  isSignedIn: boolean;
+  userId: string;
+}
+
 interface mapState {
   projects: Project[];
+  currentUser: CurrentUser;
 }
 
 const mapStateToProps = (state: mapState) => {
-  return { projects: Object.values(state.projects) };
+  return {
+    projects: Object.values(state.projects),
+    currentUser: state.currentUser,
+  };
 };
 export default connect(mapStateToProps, { createIssue, fetchProjects })(
   CreateIssue

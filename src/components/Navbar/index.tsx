@@ -6,11 +6,6 @@ import { connect } from 'react-redux';
 import { logOutUser } from '../../actions/currentUserActions';
 
 const Navbar = ({ logOutUser, currentUser }: any) => {
-  const [isSigned, setIsSigend] = useState(false);
-  useEffect(() => {
-    console.log(currentUser.isSignedIn);
-  }, [currentUser]);
-
   const handleLogOut = () => {
     logOutUser();
   };

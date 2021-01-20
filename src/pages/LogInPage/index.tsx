@@ -33,10 +33,15 @@ const LogInPage = ({ logInUser }: any) => {
       userPassword: password,
     };
     const res = await logIn(credentials);
+    if (!res!.data) return null;
     if (res!.data === 'Not Allowed') {
       alert(res!.data);
     } else {
-      logInUser(res!.data);
+      const currentUser = {
+        userId: res!.data,
+        userName: credentials.userName,
+      };
+      logInUser(currentUser);
     }
   };
   return (
