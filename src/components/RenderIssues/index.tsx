@@ -8,9 +8,9 @@ const RenderIssues = ({ list }: any) => {
     <>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Issue Id</Table.HeaderCell>
+          <Table.HeaderCell>Issue Name</Table.HeaderCell>
           <Table.HeaderCell>Author</Table.HeaderCell>
-          <Table.HeaderCell>Description</Table.HeaderCell>
+          <Table.HeaderCell>Project Reference</Table.HeaderCell>
           <Table.HeaderCell />
         </Table.Row>
       </Table.Header>
@@ -19,7 +19,7 @@ const RenderIssues = ({ list }: any) => {
           <Table.Row active={obj.active}>
             <Table.Cell>{obj.issueName}</Table.Cell>
             <Table.Cell>{obj.author}</Table.Cell>
-            <Table.Cell>{obj.description}</Table.Cell>
+            <Table.Cell>{obj.project}</Table.Cell>
             <Table.Cell>
               <Link to={`/issue/${obj._id}`}>
                 <Button inverted color="blue">

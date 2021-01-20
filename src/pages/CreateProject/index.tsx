@@ -29,7 +29,7 @@ const CreateProject = ({
 }: any) => {
   const [team, setTeam] = useState<Author[]>([]);
   const [_issues, setIssues] = useState<Issue[]>([]);
-  const [name, setName] = useState('');
+  const [projectName, setProjectName] = useState('');
   const projectId = generateId();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const CreateProject = ({
     e: ChangeEvent<HTMLInputElement>,
     data: InputOnChangeData
   ) => {
-    setName(data.value);
+    setProjectName(data.value);
   };
 
   const handleClick = () => {
@@ -49,9 +49,9 @@ const CreateProject = ({
       teamMembers: team,
       projectIssues: _issues,
       projectId: projectId,
-      projectName: name,
-      text: name,
-      value: projectId,
+      projectName: projectName,
+      text: projectName,
+      value: projectName,
     };
     createProject(newProject);
     history.push('/');
@@ -62,9 +62,9 @@ const CreateProject = ({
   const handleAddIssue = (name: string, desc: string, priority: string) => {
     const newIssue = {
       issueName: name,
-      issueId: projectId,
+      issueId: generateId(),
       author: 'franco@gmail.com',
-      project: projectId,
+      project: projectName,
       description: desc,
       active: true,
       priority: priority,
@@ -94,7 +94,7 @@ const CreateProject = ({
         </Form>
         <UsersList users={users} addUser={true} onClick={handleAddUser} />
       </Container>
-      <CreateIssue _projectRef={projectId} onAddIssue={handleAddIssue} />
+      <CreateIssue _projectRef={projectName} onAddIssue={handleAddIssue} />
     </div>
   );
 };
