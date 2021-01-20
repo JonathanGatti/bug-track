@@ -19,9 +19,11 @@ const Navbar = () => {
         <Link to="/create/project">Create Project</Link>
       </Menu.Item>
       <Menu.Item position="right">
-        <Button inverted color="red">
-          Log in
-        </Button>
+        <Link to="/login">
+          <Button inverted color="red">
+            Log in
+          </Button>
+        </Link>
       </Menu.Item>
     </Menu>
   );

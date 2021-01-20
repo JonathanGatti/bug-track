@@ -10,6 +10,7 @@ import CreateIssue from './pages/CreateIssue';
 import UserPage from './pages/UserPage';
 import CreateProject from './pages/CreateProject';
 import CreateUser from './pages/CreateUser';
+import LogInPage from './pages/LogInPage';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           path="/create/user"
           render={(routeProps) => <CreateUser {...routeProps} />}
         />
+        <Route exact path="/login" render={(routeProps) => <LogInPage />} />
       </Switch>
     </AppContainer>
   );

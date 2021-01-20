@@ -26,7 +26,7 @@ const ProjectPage = ({
 }: ProjectPageProps) => {
   useEffect(() => {
     fetchProject(match.params.id);
-  }, [project]);
+  }, []);
 
   const render = () => {
     if (!project) {

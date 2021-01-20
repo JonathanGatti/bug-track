@@ -32,6 +32,19 @@ export const postUser = async (data: Author) => {
     console.log(err);
   }
 }
+export const logIn = async (data: any) => {
+  try {
+    const res = await users.post('/users/login', 
+    data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    return res
+  } catch (err){
+    console.log(err);
+  }
+}
 
 export const deleteUserById = async (id:string) => {
   try {

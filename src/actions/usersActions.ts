@@ -1,5 +1,5 @@
 import {FETCH_USER,FETCH_USERS, CREATE_USER, DELETE_USER } from './types';
-import {getUsers, getUserById, postUser,deleteUserById} from '../api/users/usersRoutes';
+import {getUsers, getUserById, postUser,deleteUserById, logIn} from '../api/users/usersRoutes';
 import {Dispatch} from 'redux';
 import {Author} from '../interfaces';
 
@@ -17,6 +17,7 @@ export const createUser = (data: Author) => async (dispatch: Dispatch) => {
    const res = await postUser(data);
    dispatch({type: CREATE_USER, payload: res});
 }
+
 
 export const deleteUser = (id: string) => async (dispatch: Dispatch) => {
   await deleteUserById(id)
