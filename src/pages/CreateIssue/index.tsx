@@ -31,12 +31,11 @@ const CreateIssue = ({
   const [currentProject, setCurrentProject] = useState<any>({});
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<any>('');
-  console.log(_projectRef);
   useEffect(() => {
     fetchProjects();
   }, [projects.length]);
 
-  const handleClick = async () => {
+  const handleCreateIssue = async () => {
     const newIssue = {
       issueName: issueName,
       issueId: generateId(),
@@ -46,8 +45,10 @@ const CreateIssue = ({
       active: true,
       priority: priority,
     };
-    const res = await createIssue(newIssue);
-    if (!_.isEmpty(currentProject)) {
+    if (_.isEmpty(currentProject)) {
+      createIssue(newIssue);
+    } else if (!_.isEmpty(currentProject)) {
+      const res = await createIssue(newIssue);
       setCurrentProject({
         ...currentProject,
         projectIssues: [...currentProject.projectIssues, res],
@@ -138,7 +139,12 @@ const CreateIssue = ({
           </Form>
           {!_projectRef ? (
             <>
-              <Button type="submit" inverted color="blue" onClick={handleClick}>
+              <Button
+                type="submit"
+                inverted
+                color="blue"
+                onClick={handleCreateIssue}
+              >
                 Create Issue
               </Button>
               <Button type="submit" color="blue" onClick={handleSubmit}>

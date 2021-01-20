@@ -7,6 +7,8 @@ import { Author } from '../../interfaces';
 
 const Container = styled.div`
   max-width: 40vw;
+  max-height: 20vh;
+  overflow: scroll;
 `;
 
 interface UsersListProps {
