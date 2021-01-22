@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import List from '../List';
 import UsersList from '../UsersList';
 import { deleteProject } from '../../actions/projectsActions';
+import { fetchIssues } from '../../actions/issuesActions';
 import { connect } from 'react-redux';
 
 const Container = styled.div`
@@ -15,7 +16,22 @@ const Container = styled.div`
 
 const TableContainer = styled.div``;
 
-const ProjectDetail = ({ history, project, deleteProject }: any) => {
+const ProjectDetail = ({
+  history,
+  project,
+  deleteProject,
+  fetchIssues,
+  issues,
+}: any) => {
+  const [projectIssues, setProjectIssues] = useState<any>([]);
+
+  useEffect(() => {
+    fetchIssues();
+    const _projectIssues = issues.filter((issues: any) => {
+      return issues.project === project.projectName;
+    });
+    setProjectIssues([..._projectIssues]);
+  }, [issues.length]);
   const handleClick = (id: string) => {
     deleteProject(id);
     history.push('/');
@@ -24,7 +40,7 @@ const ProjectDetail = ({ history, project, deleteProject }: any) => {
     <>
       <h2>{project.projectName}</h2>
       <Container>
-        <List items={project.projectIssues} />
+        <List items={projectIssues} />
         <TableContainer>
           <Table>
             <Table.Header>
@@ -51,4 +67,9 @@ const ProjectDetail = ({ history, project, deleteProject }: any) => {
   );
 };
 
-export default connect(null, { deleteProject })(ProjectDetail);
+const mapStateToProps = (state: any) => {
+  return { issues: Object.values(state.issues) };
+};
+export default connect(mapStateToProps, { deleteProject, fetchIssues })(
+  ProjectDetail
+);

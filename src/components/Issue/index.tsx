@@ -1,42 +1,65 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { Issue, Project } from '../../interfaces';
-import { Table, Icon, Button } from 'semantic-ui-react';
+import {
+  Table,
+  Icon,
+  Button,
+  Form,
+  Dropdown,
+  DropdownProps,
+} from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { deleteIssue } from '../../actions/issuesActions';
-import { fetchProjects, editProject } from '../../actions/projectsActions';
+import { deleteIssue, editIssue } from '../../actions/issuesActions';
 import { History, LocationState } from 'history';
+import { priorities } from '../../utils/priorities';
 
 interface IssueDetailProps {
   history: History<LocationState>;
   issue: Issue;
+  editIssue: any;
   deleteIssue: (id: string) => void;
-  fetchProjects: () => any;
-  editProject: (id: string, data: Project) => void;
 }
 
 const IssueDetail = ({
   history,
   issue,
   deleteIssue,
-  editProject,
-  fetchProjects,
+  editIssue,
 }: IssueDetailProps) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [isActive, setIsActive] = useState<boolean>(issue.active);
+  const [priority, setPriority] = useState<any>(issue.priority);
+  const [description, setDescription] = useState(issue.description);
+
   const handleClick = async (id: any) => {
     deleteIssue(id);
-    const res = await fetchProjects();
-    const currProject = res.filter((project: any) => {
-      return issue.project === project.projectName;
-    });
-    const editedProject = currProject[0];
-    const newProjectIssues = editedProject.projectIssues.filter(
-      (issues: any) => {
-        return issue._id !== issues._id;
-      }
-    );
-    editedProject.projectIssues = [...newProjectIssues];
-    editProject(editedProject._id, editedProject);
     history.push('/');
   };
+  const handlePriorityChange = (
+    e: React.SyntheticEvent<HTMLElement, Event>,
+    data: DropdownProps
+  ) => {
+    setPriority(data.value);
+  };
+
+  const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setDescription(e.target.value);
+  };
+
+  const handleSaveChanges = (id: any) => {
+    setIsEditing(false);
+    const editedIssue = {
+      description: description,
+      active: isActive,
+      priority: priority,
+    };
+    console.log(editedIssue);
+    editIssue(issue._id, editedIssue);
+  };
+
+  const toggleIsActive = () => setIsActive(!isActive);
+
+  const handleEditButton = () => setIsEditing(true);
 
   const renderButtons = (issue: Issue) => {
     if (!issue._id) {
@@ -44,14 +67,76 @@ const IssueDetail = ({
     } else {
       return (
         <>
-          <Button inverted color="green">
-            Edit
-          </Button>
+          {!isEditing ? (
+            <Button onClick={handleEditButton} inverted color="green">
+              Edit
+            </Button>
+          ) : (
+            <Button
+              onClick={() => handleSaveChanges(issue._id)}
+              inverted
+              color="blue"
+            >
+              Save Changes
+            </Button>
+          )}
           <Button onClick={() => handleClick(issue._id)} inverted color="red">
             Delete
           </Button>
         </>
       );
+    }
+  };
+
+  const renderActiveButtons = () => {
+    if (isEditing) {
+      return (
+        <>
+          {isActive ? (
+            <Button onClick={toggleIsActive} inverted color="red">
+              Set Inactive
+            </Button>
+          ) : (
+            <Button onClick={toggleIsActive} inverted color="green">
+              Set Active
+            </Button>
+          )}
+        </>
+      );
+    } else return null;
+  };
+
+  const renderPrioritiesOptions = () => {
+    if (isEditing) {
+      return (
+        <Form.Field>
+          <label>Select the priority</label>
+          <Dropdown
+            placeholder="Select The Priority"
+            fluid
+            selection
+            options={priorities}
+            onChange={handlePriorityChange}
+          />
+        </Form.Field>
+      );
+    } else return priority;
+  };
+
+  const renderDescriptionForm = () => {
+    if (isEditing) {
+      return (
+        <Form.Field>
+          <label>Description</label>
+          <Form.Input
+            onChange={handleDescriptionChange}
+            placeholder="Description"
+            value={description}
+          />
+        </Form.Field>
+      );
+    } else {
+      return description;
     }
   };
   return (
@@ -76,13 +161,14 @@ const IssueDetail = ({
             <Table.Cell>{issue.project}</Table.Cell>
             <Table.Cell>{issue.author}</Table.Cell>
             <Table.Cell textAlign="center">
-              {issue.active ? (
+              {isActive ? (
                 <Icon color="green" name="checkmark" size="large" />
               ) : (
                 <Icon color="red" name="close" size="large" />
               )}
+              {renderActiveButtons()}
             </Table.Cell>
-            <Table.Cell>{issue.priority}</Table.Cell>
+            <Table.Cell>{renderPrioritiesOptions()}</Table.Cell>
             <Table.Cell>{issue.date}</Table.Cell>
           </Table.Row>
         </Table.Body>
@@ -92,7 +178,7 @@ const IssueDetail = ({
           <Table.HeaderCell>Description</Table.HeaderCell>
         </Table.Header>
         <Table.Row>
-          <Table.Cell>{issue.description}</Table.Cell>
+          <Table.Cell>{renderDescriptionForm()}</Table.Cell>
         </Table.Row>
       </Table>
       {renderButtons(issue)}
@@ -100,6 +186,4 @@ const IssueDetail = ({
   );
 };
 
-export default connect(null, { deleteIssue, fetchProjects, editProject })(
-  IssueDetail
-);
+export default connect(null, { deleteIssue, editIssue })(IssueDetail);

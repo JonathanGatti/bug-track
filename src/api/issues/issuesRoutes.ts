@@ -33,9 +33,9 @@ export const postIssue = async (data: Issue) => {
   }
 }
 
-export const patchIssue = async (data: Issue) => {
+export const patchIssue = async (id: any, data: Issue) => {
   try {
-    let res = await issues.patch(`/issues/${data._id}`)
+    let res = await issues.patch(`/issues/${id}`, data)
     return res.data 
   } catch(err) {
     console.log(err);
