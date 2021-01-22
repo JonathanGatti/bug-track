@@ -32,3 +32,7 @@ export interface CurrentUser {
   userId: string;
   userName: string;
 }
+
+export interface Comment {
+  
+}

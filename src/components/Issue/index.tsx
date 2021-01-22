@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import { Issue, Project } from '../../interfaces';
+import { Issue } from '../../interfaces';
 import {
   Table,
   Icon,
@@ -116,6 +116,7 @@ const IssueDetail = ({
             fluid
             selection
             options={priorities}
+            value={priority}
             onChange={handlePriorityChange}
           />
         </Form.Field>
