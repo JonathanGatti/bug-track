@@ -1,7 +1,8 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
-import { Form, Label, Button, TextAreaProps } from 'semantic-ui-react';
+import React, { useState, ChangeEvent } from 'react';
+import { Form, Button, TextAreaProps } from 'semantic-ui-react';
 import { createComment } from '../../actions/commentsActions';
 import { connect } from 'react-redux';
+import CommentForm from '../CommentForm';
 const CreateComment = ({
   createComment,
   currentUser,
@@ -28,18 +29,11 @@ const CreateComment = ({
     setContent(data.value);
   };
   return (
-    <Form>
-      <Form reply>
-        <Form.TextArea onChange={handleChange} />
-        <Button
-          onClick={handleAddComment}
-          content="Add Comment"
-          labelPosition="left"
-          icon="edit"
-          primary
-        />
-      </Form>
-    </Form>
+    <CommentForm
+      onComment={handleAddComment}
+      onAddChange={handleChange}
+      action="Add"
+    />
   );
 };
 

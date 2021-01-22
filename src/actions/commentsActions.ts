@@ -20,9 +20,9 @@ export const createComment = (data: Comment) => async (dispatch: Dispatch) => {
     return res;
   }
 
-export const editComment = (id: any, data: Comment) => async (dispatch: Dispatch) => {
+export const editComment = (id: any, data: any) => async (dispatch: Dispatch) => {
     const res = await patchComment(id, data);
-
+    
     dispatch({type: EDIT_COMMENT, payload: res})
   }
 

@@ -2,8 +2,14 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchComments } from '../../actions/commentsActions';
 import { Comment, Header } from 'semantic-ui-react';
+import CommentDetail from '../Comment';
 
-const CommentsList = ({ issueRef, fetchComments, comments }: any) => {
+const CommentsList = ({
+  issueRef,
+  fetchComments,
+  comments,
+  currentUser,
+}: any) => {
   useEffect(() => {
     fetchComments();
   }, []);
@@ -13,15 +19,9 @@ const CommentsList = ({ issueRef, fetchComments, comments }: any) => {
       return comment.issueReference === issueRef;
     });
     return referencedComments.map((comment: any) => (
-      <Comment>
-        <Comment.Content>
-          <Comment.Author as="a">{comment.author}</Comment.Author>
-          <Comment.Metadata>
-            <div>{comment.date}</div>
-          </Comment.Metadata>
-          <Comment.Text>{comment.content}</Comment.Text>
-        </Comment.Content>
-      </Comment>
+      <>
+        <CommentDetail comment={comment} currentUser={currentUser} />
+      </>
     ));
   };
   return (
@@ -35,6 +35,9 @@ const CommentsList = ({ issueRef, fetchComments, comments }: any) => {
 };
 
 const mapStateToProps = (state: any) => {
-  return { comments: Object.values(state.comments) };
+  return {
+    comments: Object.values(state.comments),
+    currentUser: state.currentUser,
+  };
 };
 export default connect(mapStateToProps, { fetchComments })(CommentsList);

@@ -33,7 +33,7 @@ export const postComment = async (data: Comment) => {
   }
 }
 
-export const patchComment = async (id: any, data: Comment) => {
+export const patchComment = async (id: any, data: any) => {
   try {
     let res = await comments.patch(`/comments/${id}`, data)
     return res.data 
