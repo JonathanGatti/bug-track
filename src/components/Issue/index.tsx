@@ -184,8 +184,10 @@ const IssueDetail = ({
         </Table.Row>
       </Table>
       {renderButtons(issue)}
-      <Button onClick={() => setIsCommenting(true)}>Add a comment</Button>
-      {isCommenting && <CreateComment />}
+      <Button inverted color="blue" onClick={() => setIsCommenting(true)}>
+        Add a comment
+      </Button>
+      {isCommenting && <CreateComment setOnCommenting={setIsCommenting} />}
     </>
   );
 };
