@@ -38,4 +38,5 @@ export interface Comment {
   authorId: string,
   date?: Date,
   content: string,
+  issueReference: string;
 }

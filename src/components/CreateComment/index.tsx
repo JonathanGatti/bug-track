@@ -6,14 +6,17 @@ const CreateComment = ({
   createComment,
   currentUser,
   setOnCommenting,
+  issueRef,
 }: any) => {
   const [content, setContent] = useState<string | undefined | number>('');
 
   const handleAddComment = () => {
     const newComment = {
-      authorId: currentUser.userId,
+      author: currentUser.userName,
       content: content,
+      issueReference: issueRef,
     };
+    console.log(newComment);
     createComment(newComment);
     setOnCommenting(false);
   };
@@ -30,7 +33,7 @@ const CreateComment = ({
         <Form.TextArea onChange={handleChange} />
         <Button
           onClick={handleAddComment}
-          content="Add Reply"
+          content="Add Comment"
           labelPosition="left"
           icon="edit"
           primary

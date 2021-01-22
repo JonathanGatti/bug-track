@@ -5,7 +5,13 @@ import { mapState } from './interfaces';
 import { createIssue } from '../../actions/issuesActions';
 import { fetchProjects, editProject } from '../../actions/projectsActions';
 import { priorities } from '../../utils/priorities';
-import { Form, Button, Dropdown, DropdownProps } from 'semantic-ui-react';
+import {
+  Form,
+  Button,
+  Dropdown,
+  DropdownProps,
+  TextAreaProps,
+} from 'semantic-ui-react';
 import { generateId } from '../../utils/generateId';
 import styled from 'styled-components';
 import LogInWarning from '../../common/logInWarning';
@@ -25,7 +31,9 @@ const CreateIssue = ({
 }: any) => {
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>(' ');
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState<string | number | undefined>(
+    ''
+  );
   const [priority, setPriority] = useState<any>(' ');
   useEffect(() => {
     fetchProjects();
@@ -48,8 +56,11 @@ const CreateIssue = ({
     setIssueName(e.target.value);
   };
 
-  const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDescription(e.target.value);
+  const handleDescriptionChange = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+    data: TextAreaProps
+  ) => {
+    setDescription(data.value);
   };
 
   const handleProjectRefChange = (
@@ -83,7 +94,7 @@ const CreateIssue = ({
             </Form.Field>
             <Form.Field>
               <label>Description</label>
-              <Form.Input
+              <Form.TextArea
                 onChange={handleDescriptionChange}
                 placeholder="Description"
               />

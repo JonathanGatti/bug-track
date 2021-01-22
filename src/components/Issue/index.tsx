@@ -13,6 +13,7 @@ import { deleteIssue, editIssue } from '../../actions/issuesActions';
 import { History, LocationState } from 'history';
 import { priorities } from '../../utils/priorities';
 import CreateComment from '../CreateComment';
+import CommentsList from '../CommentsList';
 
 interface IssueDetailProps {
   history: History<LocationState>;
@@ -187,7 +188,13 @@ const IssueDetail = ({
       <Button inverted color="blue" onClick={() => setIsCommenting(true)}>
         Add a comment
       </Button>
-      {isCommenting && <CreateComment setOnCommenting={setIsCommenting} />}
+      {isCommenting && (
+        <CreateComment
+          issueRef={issue.issueId}
+          setOnCommenting={setIsCommenting}
+        />
+      )}
+      <CommentsList issueRef={issue.issueId} />
     </>
   );
 };
