@@ -28,7 +28,7 @@ const IssueDetail = ({
       return issue.project === project.projectName;
     });
     const editedProject = currProject[0];
-    const newProjectIssues = currProject[0].projectIssues.filter(
+    const newProjectIssues = editedProject.projectIssues.filter(
       (issues: any) => {
         return issue._id !== issues._id;
       }
