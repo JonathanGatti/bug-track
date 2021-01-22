@@ -1,8 +1,9 @@
 import React, { useState, ChangeEvent } from 'react';
-import { Form, Button, TextAreaProps } from 'semantic-ui-react';
+import { TextAreaProps } from 'semantic-ui-react';
 import { createComment } from '../../actions/commentsActions';
 import { connect } from 'react-redux';
 import CommentForm from '../CommentForm';
+import LogInWarning from '../../common/logInWarning';
 const CreateComment = ({
   createComment,
   currentUser,
@@ -12,14 +13,16 @@ const CreateComment = ({
   const [content, setContent] = useState<string | undefined | number>('');
 
   const handleAddComment = () => {
-    const newComment = {
-      author: currentUser.userName,
-      content: content,
-      issueReference: issueRef,
-    };
-    console.log(newComment);
-    createComment(newComment);
-    setOnCommenting(false);
+    if (content !== '') {
+      console.log('hi');
+      const newComment = {
+        author: currentUser.userName,
+        content: content,
+        issueReference: issueRef,
+      };
+      createComment(newComment);
+      setOnCommenting(false);
+    } else return null;
   };
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement>,
@@ -28,13 +31,21 @@ const CreateComment = ({
     e.preventDefault();
     setContent(data.value);
   };
-  return (
-    <CommentForm
-      onComment={handleAddComment}
-      onAddChange={handleChange}
-      action="Add"
-    />
-  );
+
+  const render = () => {
+    if (!currentUser.isSignedIn) {
+      return <LogInWarning />;
+    } else {
+      return (
+        <CommentForm
+          onAddComment={handleAddComment}
+          onChange={handleChange}
+          action="Add"
+        />
+      );
+    }
+  };
+  return <>{render()}</>;
 };
 
 const mapStateToProps = (state: any) => {

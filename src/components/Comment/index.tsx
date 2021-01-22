@@ -14,18 +14,19 @@ const CommentDetail = ({
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState<number | string | undefined>('');
 
-  const handleEditButton = () => {
-    setIsEditing(true);
-  };
   const handleDeleteButton = (id: string) => {
     deleteComment(id);
   };
   const handleEditComment = () => {
-    const newComment = {
-      content: newContent,
-    };
-    editComment(_id, newComment);
-    setIsEditing(false);
+    if (newContent === '') {
+      setIsEditing(false);
+    } else {
+      const newComment = {
+        content: newContent,
+      };
+      editComment(_id, newComment);
+      setIsEditing(false);
+    }
   };
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement>,
@@ -38,7 +39,7 @@ const CommentDetail = ({
     if (author === currentUser.userName) {
       return (
         <Button.Group>
-          <Button inverted color="green" onClick={handleEditButton}>
+          <Button inverted color="green" onClick={() => setIsEditing(true)}>
             Edit
           </Button>
           <Button inverted color="red" onClick={() => handleDeleteButton(_id)}>
