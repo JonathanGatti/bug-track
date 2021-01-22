@@ -7,7 +7,6 @@ import { createIssue, fetchIssues } from '../../actions/issuesActions';
 import { Author, Issue, Project } from '../../interfaces';
 import { generateId } from '../../utils/generateId';
 import UsersList from '../../components/UsersList';
-import CreateIssue from '../CreateIssue';
 import styled from 'styled-components';
 import LogInWarning from '../../common/logInWarning';
 
@@ -30,14 +29,13 @@ const CreateProject = ({
   currentUser,
 }: any) => {
   const [team, setTeam] = useState<Author[]>([]);
-  const [_issues, setIssues] = useState<Issue[]>([]);
   const [projectName, setProjectName] = useState('');
   const projectId = generateId();
 
   useEffect(() => {
     fetchUsers();
     fetchIssues();
-  }, [issues.length, users.length]);
+  }, [issues.length]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -49,7 +47,7 @@ const CreateProject = ({
   const handleClick = () => {
     const newProject: Project = {
       teamMembers: team,
-      projectIssues: _issues,
+      projectIssues: [],
       projectId: projectId,
       projectName: projectName,
       text: projectName,
@@ -61,26 +59,7 @@ const CreateProject = ({
   const handleAddUser = (user: Author) => {
     setTeam([...team, user]);
   };
-  const handleAddIssue = (name: string, desc: string, priority: string) => {
-    const newIssue = {
-      issueName: name,
-      issueId: generateId(),
-      author: currentUser.userName,
-      project: projectName,
-      description: desc,
-      active: true,
-      priority: priority,
-    };
-    const setNewIssue = async () => {
-      await createIssue(newIssue);
-      const res = await fetchIssues();
-      const newIssues = res.filter(
-        (issue: Issue) => issue.project === newIssue.project
-      );
-      setIssues([...newIssues]);
-    };
-    setNewIssue();
-  };
+
   const render = () => {
     if (!currentUser) return null;
     if (!currentUser.isSignedIn) return <LogInWarning />;
@@ -99,7 +78,6 @@ const CreateProject = ({
             </Form>
             <UsersList users={users} addUser={true} onClick={handleAddUser} />
           </Container>
-          <CreateIssue _projectRef={projectName} onAddIssue={handleAddIssue} />
         </>
       );
     }

@@ -1,29 +1,50 @@
 import React from 'react';
-import { Issue } from '../../interfaces';
+import { Issue, Project } from '../../interfaces';
 import { Table, Icon, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { deleteIssue } from '../../actions/issuesActions';
+import { fetchProjects, editProject } from '../../actions/projectsActions';
 import { History, LocationState } from 'history';
 
 interface IssueDetailProps {
   history: History<LocationState>;
   issue: Issue;
   deleteIssue: (id: string) => void;
+  fetchProjects: () => any;
+  editProject: (id: string, data: Project) => void;
 }
 
-const IssueDetail = ({ history, issue, deleteIssue }: IssueDetailProps) => {
-  const handleClick = (id: any) => {
+const IssueDetail = ({
+  history,
+  issue,
+  deleteIssue,
+  editProject,
+  fetchProjects,
+}: IssueDetailProps) => {
+  const handleClick = async (id: any) => {
     deleteIssue(id);
+    const res = await fetchProjects();
+    const currProject = res.filter((project: any) => {
+      return issue.project === project.projectName;
+    });
+    const editedProject = currProject[0];
+    const newProjectIssues = currProject[0].projectIssues.filter(
+      (issues: any) => {
+        return issue._id !== issues._id;
+      }
+    );
+    editedProject.projectIssues = [...newProjectIssues];
+    editProject(editedProject._id, editedProject);
     history.push('/');
   };
 
   const renderButtons = (issue: Issue) => {
-    if (issue._id === undefined) {
+    if (!issue._id) {
       return null;
     } else {
       return (
         <>
-          <Button onClick={() => handleClick(issue._id)} inverted color="green">
+          <Button inverted color="green">
             Edit
           </Button>
           <Button onClick={() => handleClick(issue._id)} inverted color="red">
@@ -79,4 +100,6 @@ const IssueDetail = ({ history, issue, deleteIssue }: IssueDetailProps) => {
   );
 };
 
-export default connect(null, { deleteIssue })(IssueDetail);
+export default connect(null, { deleteIssue, fetchProjects, editProject })(
+  IssueDetail
+);

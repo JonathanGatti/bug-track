@@ -22,8 +22,6 @@ const CreateIssue = ({
   fetchProjects,
   editProject,
   projects,
-  _projectRef,
-  onAddIssue,
   currentUser,
 }: any) => {
   const [issueName, setIssueName] = useState('');
@@ -114,18 +112,16 @@ const CreateIssue = ({
                 placeholder="Description"
               />
             </Form.Field>
-            {!_projectRef && (
-              <Form.Field>
-                <label>Select a project reference</label>
-                <Dropdown
-                  placeholder="Select A project Reference"
-                  fluid
-                  selection
-                  options={projects}
-                  onChange={handleProjectRefChange}
-                />
-              </Form.Field>
-            )}
+            <Form.Field>
+              <label>Select a project reference</label>
+              <Dropdown
+                placeholder="Select A project Reference"
+                fluid
+                selection
+                options={projects}
+                onChange={handleProjectRefChange}
+              />
+            </Form.Field>
             <Form.Field>
               <label>Select the priority</label>
               <Dropdown
@@ -137,29 +133,19 @@ const CreateIssue = ({
               />
             </Form.Field>
           </Form>
-          {!_projectRef ? (
-            <>
-              <Button
-                type="submit"
-                inverted
-                color="blue"
-                onClick={handleCreateIssue}
-              >
-                Create Issue
-              </Button>
-              <Button type="submit" color="blue" onClick={handleSubmit}>
-                Submit
-              </Button>
-            </>
-          ) : (
+          <>
             <Button
-              onClick={() => onAddIssue(issueName, description, priority)}
+              type="submit"
               inverted
               color="blue"
+              onClick={handleCreateIssue}
             >
-              Add Issue
+              Create Issue
             </Button>
-          )}
+            <Button type="submit" color="blue" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </>
         </Container>
       );
     }

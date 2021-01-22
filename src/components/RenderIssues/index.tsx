@@ -4,6 +4,26 @@ import { Table, Button } from 'semantic-ui-react';
 import { Issue } from '../../interfaces';
 
 const RenderIssues = ({ list }: any) => {
+  const renderIssueList = (obj: Issue) => {
+    if (!obj._id) {
+      return null;
+    } else {
+      return (
+        <Table.Row active={obj.active} key={obj._id}>
+          <Table.Cell>{obj.issueName}</Table.Cell>
+          <Table.Cell>{obj.author}</Table.Cell>
+          <Table.Cell>{obj.project}</Table.Cell>
+          <Table.Cell>
+            <Link to={`/issue/${obj._id}`}>
+              <Button inverted color="blue">
+                View More
+              </Button>
+            </Link>
+          </Table.Cell>
+        </Table.Row>
+      );
+    }
+  };
   return (
     <Table definition>
       <Table.Header>
@@ -14,22 +34,7 @@ const RenderIssues = ({ list }: any) => {
           <Table.HeaderCell />
         </Table.Row>
       </Table.Header>
-      <Table.Body>
-        {list.map((obj: Issue) => (
-          <Table.Row active={obj.active} key={obj._id}>
-            <Table.Cell>{obj.issueName}</Table.Cell>
-            <Table.Cell>{obj.author}</Table.Cell>
-            <Table.Cell>{obj.project}</Table.Cell>
-            <Table.Cell>
-              <Link to={`/issue/${obj._id}`}>
-                <Button inverted color="blue">
-                  View More
-                </Button>
-              </Link>
-            </Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
+      <Table.Body>{list.map((obj: Issue) => renderIssueList(obj))}</Table.Body>
     </Table>
   );
 };

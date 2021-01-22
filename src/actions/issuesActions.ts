@@ -3,7 +3,7 @@ import {getIssues, getIssue, postIssue, patchIssue, deleteIssueById} from '../ap
 import { Issue } from '../interfaces';
 import {Dispatch} from 'redux';
 
-export const fetchIssues = () => async (dispatch: Dispatch) => {
+export const fetchIssues = () => async (dispatch: Dispatch)  => {
   const res = await getIssues();
   dispatch({type: FETCH_ISSUES, payload: res})
   return res;

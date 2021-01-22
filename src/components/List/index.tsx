@@ -1,12 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
-import { Table } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Project, Issue } from '../../interfaces';
 import RenderIssues from '../RenderIssues';
 import RenderProjects from '../RenderProjects';
 import Spinner from '../../common/spinner';
-import NoContentWarning from '../../common/noContentWarning';
 
 const ListContainer = styled.div`
   width: 70vw;
@@ -19,9 +17,9 @@ interface ListProps {
 
 const List = ({ items }: any) => {
   const render = () => {
-    if (!items) return <Spinner />;
+    if (!items) return null;
     if (!items[0]) {
-      return <NoContentWarning />;
+      return <Spinner />;
     } else if (items[0].projectId) {
       return <RenderProjects list={items} />;
     } else {

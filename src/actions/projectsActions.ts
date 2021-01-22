@@ -6,6 +6,7 @@ import {Project} from '../interfaces';
 export const fetchProjects = () => async (dispatch: Dispatch) => {
   const res = await getProjects();
   dispatch({type: FETCH_PROJECTS, payload: res});
+  return res;
 }
 
 export const fetchProject = (id: string) => async (dispatch: Dispatch) => {
