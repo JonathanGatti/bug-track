@@ -20,8 +20,8 @@ export const createIssue = (data: Issue) => async (dispatch: Dispatch) => {
     return res;
   }
 
-export const editIssue = (data: Issue) => async (dispatch: Dispatch) => {
-    const res = await patchIssue(data);
+export const editIssue = (id: any, data: Issue) => async (dispatch: Dispatch) => {
+    const res = await patchIssue(id, data);
 
     dispatch({type: EDIT_ISSUE, payload: res})
   }

@@ -20,20 +20,18 @@ const CreateIssue = ({
   history,
   createIssue,
   fetchProjects,
-  editProject,
   projects,
   currentUser,
 }: any) => {
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');
-  const [currentProject, setCurrentProject] = useState<any>({});
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<any>('');
   useEffect(() => {
     fetchProjects();
   }, [projects.length]);
 
-  const handleCreateIssue = async () => {
+  const handleSubmit = () => {
     const newIssue = {
       issueName: issueName,
       issueId: generateId(),
@@ -43,23 +41,9 @@ const CreateIssue = ({
       active: true,
       priority: priority,
     };
-    if (_.isEmpty(currentProject)) {
-      createIssue(newIssue);
-    } else if (!_.isEmpty(currentProject)) {
-      const res = await createIssue(newIssue);
-      setCurrentProject({
-        ...currentProject,
-        projectIssues: [...currentProject.projectIssues, res],
-      });
-    }
-  };
-  const handleSubmit = () => {
-    if (!_.isEmpty(currentProject)) {
-      editProject(currentProject._id, currentProject);
-    }
+    createIssue(newIssue);
     history.push('/');
   };
-
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIssueName(e.target.value);
   };
@@ -73,14 +57,6 @@ const CreateIssue = ({
     data: DropdownProps
   ) => {
     setProjectRef(data.value);
-    if (!data.options) return null;
-    if (data.options) {
-      const projects = data.options;
-      const selectedProject = projects?.filter((project: any) => {
-        return project.value === data.value;
-      });
-      setCurrentProject(selectedProject![0]);
-    }
   };
 
   const handlePriorityChange = (
@@ -133,19 +109,9 @@ const CreateIssue = ({
               />
             </Form.Field>
           </Form>
-          <>
-            <Button
-              type="submit"
-              inverted
-              color="blue"
-              onClick={handleCreateIssue}
-            >
-              Create Issue
-            </Button>
-            <Button type="submit" color="blue" onClick={handleSubmit}>
-              Submit
-            </Button>
-          </>
+          <Button type="submit" color="blue" onClick={handleSubmit}>
+            Submit
+          </Button>
         </Container>
       );
     }

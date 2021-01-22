@@ -25,7 +25,6 @@ const CreateProject = ({
   issues,
   users,
   createProject,
-  createIssue,
   currentUser,
 }: any) => {
   const [team, setTeam] = useState<Author[]>([]);
@@ -47,7 +46,6 @@ const CreateProject = ({
   const handleClick = () => {
     const newProject: Project = {
       teamMembers: team,
-      projectIssues: [],
       projectId: projectId,
       projectName: projectName,
       text: projectName,

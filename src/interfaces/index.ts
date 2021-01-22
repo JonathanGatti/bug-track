@@ -13,7 +13,6 @@ export interface Issue {
 export interface Project {
   _id?: string;
   teamMembers: Author[];
-  projectIssues: Issue[];
   projectId: string | number;
   projectName: string;
   text: string;
@@ -32,4 +31,8 @@ export interface CurrentUser {
   isSignedIn?: boolean;
   userId: string;
   userName: string;
+}
+
+export interface Comment {
+  
 }
