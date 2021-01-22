@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { deleteIssue, editIssue } from '../../actions/issuesActions';
 import { History, LocationState } from 'history';
 import { priorities } from '../../utils/priorities';
+import CreateComment from '../CreateComment';
 
 interface IssueDetailProps {
   history: History<LocationState>;
@@ -30,6 +31,7 @@ const IssueDetail = ({
   const [isActive, setIsActive] = useState<boolean>(issue.active);
   const [priority, setPriority] = useState<any>(issue.priority);
   const [description, setDescription] = useState(issue.description);
+  const [isCommenting, setIsCommenting] = useState(false);
 
   const handleClick = async (id: any) => {
     deleteIssue(id);
@@ -53,7 +55,6 @@ const IssueDetail = ({
       active: isActive,
       priority: priority,
     };
-    console.log(editedIssue);
     editIssue(issue._id, editedIssue);
   };
 
@@ -183,6 +184,8 @@ const IssueDetail = ({
         </Table.Row>
       </Table>
       {renderButtons(issue)}
+      <Button onClick={() => setIsCommenting(true)}>Add a comment</Button>
+      {isCommenting && <CreateComment />}
     </>
   );
 };

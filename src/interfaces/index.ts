@@ -34,5 +34,8 @@ export interface CurrentUser {
 }
 
 export interface Comment {
-  
+  _id?: string; 
+  authorId: string,
+  date?: Date,
+  content: string,
 }

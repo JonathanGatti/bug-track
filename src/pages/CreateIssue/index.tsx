@@ -24,9 +24,9 @@ const CreateIssue = ({
   currentUser,
 }: any) => {
   const [issueName, setIssueName] = useState('');
-  const [projectRef, setProjectRef] = useState<any>('');
+  const [projectRef, setProjectRef] = useState<any>(' ');
   const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState<any>('');
+  const [priority, setPriority] = useState<any>(' ');
   useEffect(() => {
     fetchProjects();
   }, [projects.length]);
