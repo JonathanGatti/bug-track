@@ -31,13 +31,14 @@ const CreateIssue = ({
 }: any) => {
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>(' ');
+  const [priority, setPriority] = useState<any>(' ');
   const [description, setDescription] = useState<string | number | undefined>(
     ''
   );
-  const [priority, setPriority] = useState<any>(' ');
+
   useEffect(() => {
     fetchProjects();
-  }, [projects.length]);
+  }, []);
 
   const handleSubmit = () => {
     const newIssue = {
@@ -88,6 +89,7 @@ const CreateIssue = ({
             <Form.Field>
               <label>Name</label>
               <Form.Input
+                required
                 onChange={handleNameChange}
                 placeholder="Issue Name"
               />
@@ -120,7 +122,12 @@ const CreateIssue = ({
               />
             </Form.Field>
           </Form>
-          <Button type="submit" color="blue" onClick={handleSubmit}>
+          <Button
+            disabled={false}
+            type="submit"
+            color="blue"
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </Container>

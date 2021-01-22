@@ -4,6 +4,7 @@ import { createComment } from '../../actions/commentsActions';
 import { connect } from 'react-redux';
 import CommentForm from '../CommentForm';
 import LogInWarning from '../../common/logInWarning';
+
 const CreateComment = ({
   createComment,
   currentUser,
