@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch } from 'react';
 import { Table } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
@@ -18,18 +18,25 @@ interface UsersListProps {
   addUser: boolean;
   projectRef: string;
   editUser: (id: string, data: any) => void;
+  onToggleIsListShowing?: () => void;
 }
 const UsersList = ({
   users,
   addUser,
   projectRef,
   editUser,
+  onToggleIsListShowing,
 }: UsersListProps) => {
   const handleAddUser = (user: any) => {
-    const editedUser = {
-      userProjects: [...user.userProjects, projectRef],
-    };
-    editUser(user._id, editedUser);
+    const includes = user.userProjects.includes(projectRef);
+    if (includes && onToggleIsListShowing) onToggleIsListShowing();
+    else {
+      const editedUser = {
+        userProjects: [...user.userProjects, projectRef],
+      };
+      editUser(user._id, editedUser);
+    }
+    if (onToggleIsListShowing) onToggleIsListShowing();
   };
 
   const renderList = (user: any) => {

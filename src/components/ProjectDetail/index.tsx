@@ -8,6 +8,7 @@ import { deleteProject } from '../../actions/projectsActions';
 import { fetchIssues } from '../../actions/issuesActions';
 import { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
+import { useForceUpdate } from '../../utils/forceUpdate';
 
 const Container = styled.div`
   display: flex;
@@ -30,6 +31,8 @@ const ProjectDetail = ({
   const [projectIssues, setProjectIssues] = useState<any>([]);
   const [isListShowig, setIsListShowing] = useState(false);
   const [projectUsers, setProjectUsers] = useState<any>([]);
+  const forceUpdate = useForceUpdate();
+
   useEffect(() => {
     fetchIssues();
     fetchUsers();
@@ -37,11 +40,11 @@ const ProjectDetail = ({
 
     users.forEach((user: any) => {
       if (user.userProjects) {
-        for (let i = 0; i < user.userProjects.length; i++) {
-          if (user.userProjects[i] === project.projectName) {
+        user.userProjects.forEach((_project: string) => {
+          if (_project === project.projectName) {
             newUsers.push(user);
           }
-        }
+        });
       }
     });
     setProjectUsers([...newUsers]);
@@ -56,8 +59,8 @@ const ProjectDetail = ({
     history.push('/');
   };
 
-  const handleAddAMember = () => {
-    setIsListShowing(true);
+  const toggleIsListShowing = () => {
+    setIsListShowing(!isListShowig);
   };
   return (
     <>
@@ -87,7 +90,7 @@ const ProjectDetail = ({
               Add an Issue
             </Button>
           </Link>
-          <Button onClick={handleAddAMember} inverted color="green">
+          <Button onClick={toggleIsListShowing} inverted color="green">
             Add A Member
           </Button>
           <Button onClick={() => handleClick(project._id)} inverted color="red">
@@ -100,6 +103,7 @@ const ProjectDetail = ({
           users={users}
           addUser={true}
           projectRef={project.projectName}
+          onToggleIsListShowing={toggleIsListShowing}
         />
       )}
     </>
