@@ -3,7 +3,7 @@ import { InputOnChangeData } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/usersActions';
 import { generateId } from '../../utils/generateId';
-import { Author } from '../../interfaces';
+import { Author, CurrentUser } from '../../interfaces';
 import { History, LocationState } from 'history';
 import UserForm from '../../components/UserForm';
 import LogInWarning from '../../common/logInWarning';
@@ -18,7 +18,7 @@ const Container = styled.div`
 interface CreateUserProps {
   history: History<LocationState>;
   createUser: (user: Author) => void;
-  currentUser: any;
+  currentUser: CurrentUser;
 }
 
 const CreateUser = ({ history, createUser, currentUser }: CreateUserProps) => {
@@ -45,6 +45,7 @@ const CreateUser = ({ history, createUser, currentUser }: CreateUserProps) => {
         userId: generateId(),
         userName: name,
         userPassword: password,
+        userProjects: [],
       };
       createUser(newUser);
       history.push('/');
@@ -70,7 +71,10 @@ const CreateUser = ({ history, createUser, currentUser }: CreateUserProps) => {
   return <div>{render()}</div>;
 };
 
-const mapStateToProps = (state: any) => {
+interface mapState {
+  currentUser: CurrentUser;
+}
+const mapStateToProps = (state: mapState) => {
   return { currentUser: state.currentUser };
 };
 export default connect(mapStateToProps, { createUser })(CreateUser);

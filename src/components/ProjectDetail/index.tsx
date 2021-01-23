@@ -8,15 +8,18 @@ import { deleteProject } from '../../actions/projectsActions';
 import { fetchIssues } from '../../actions/issuesActions';
 import { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
-import { useForceUpdate } from '../../utils/forceUpdate';
+import { Author, Issue } from '../../interfaces';
+import { ProjectDetailProps, mapState } from './interfaces';
 
 const Container = styled.div`
   display: flex;
-  width: 85vw;
+  width: 100%;
   padding-left: 0;
 `;
 
-const TableContainer = styled.div``;
+const TableContainer = styled.div`
+  width: 25vw;
+`;
 
 const ProjectDetail = ({
   history,
@@ -27,18 +30,17 @@ const ProjectDetail = ({
   currentUser,
   fetchUsers,
   users,
-}: any) => {
+}: ProjectDetailProps) => {
   const [projectIssues, setProjectIssues] = useState<any>([]);
   const [isListShowig, setIsListShowing] = useState(false);
   const [projectUsers, setProjectUsers] = useState<any>([]);
-  const forceUpdate = useForceUpdate();
 
   useEffect(() => {
     fetchIssues();
     fetchUsers();
-    let newUsers: any = [];
+    let newUsers: Author[] = [];
 
-    users.forEach((user: any) => {
+    users.forEach((user: Author) => {
       if (user.userProjects) {
         user.userProjects.forEach((_project: string) => {
           if (_project === project.projectName) {
@@ -48,13 +50,14 @@ const ProjectDetail = ({
       }
     });
     setProjectUsers([...newUsers]);
-    const _projectIssues = issues.filter((issues: any) => {
+    const _projectIssues = issues.filter((issues: Issue) => {
       return issues.project === project.projectName;
     });
     setProjectIssues([..._projectIssues]);
   }, []);
 
-  const handleClick = (id: string) => {
+  const handleClick = (id: string | undefined) => {
+    if (!id) return null;
     deleteProject(id);
     history.push('/');
   };
@@ -110,7 +113,7 @@ const ProjectDetail = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: mapState) => {
   return {
     issues: Object.values(state.issues),
     users: Object.values(state.users),

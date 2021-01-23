@@ -59,7 +59,7 @@ const LogInPage = ({ history, logInUser }: LogInPageProps) => {
       <h2>Log In</h2>
       <ModalTemplate
         open={isOpen}
-        content="Incorrect username or password"
+        content="Incorrect username or password. Username: admin, password: password"
         onOpen={setIsOpen}
       />
       <UserForm

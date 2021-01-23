@@ -17,10 +17,16 @@ const VerticalHeader = () => {
           <p>Create New Project</p>
         </Link>
       </Menu.Item>
+      <Menu.Item name="Projects List">
+        <Link to="/projects">
+          <Menu.Header as="h4">Project</Menu.Header>
+          <p>List of All The Projects</p>
+        </Link>
+      </Menu.Item>
       <Menu.Item name="users">
         <Link to="/create/user">
           <Menu.Header as="h4">Sign Up</Menu.Header>
-          <p>Create a New Account</p>
+          <p>Create New Account</p>
         </Link>
       </Menu.Item>
     </Menu>

@@ -4,24 +4,32 @@ import { connect } from 'react-redux';
 import { editComment, deleteComment } from '../../actions/commentsActions';
 import CommentForm from '../CommentForm';
 import styled from 'styled-components';
+import { CommentInterface, CurrentUser } from '../../interfaces';
 
 const Container = styled.div`
   display: flex;
 `;
 
+interface CommentDetailProps {
+  comment: CommentInterface;
+  currentUser: CurrentUser;
+  editComment: (id: string, data: any) => void;
+  deleteComment: (id: string) => void;
+}
 const CommentDetail = ({
   comment,
   currentUser,
   editComment,
   deleteComment,
-}: any) => {
+}: CommentDetailProps) => {
   const { _id, author, content, date } = comment;
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState<number | string | undefined>('');
 
-  const handleDeleteButton = (id: string) => {
-    deleteComment(id);
+  const handleDeleteButton = (id: string | undefined) => {
+    if (id) deleteComment(id);
   };
+
   const handleEditComment = () => {
     if (newContent === '') {
       setIsEditing(false);
@@ -29,10 +37,11 @@ const CommentDetail = ({
       const newComment = {
         content: newContent,
       };
-      editComment(_id, newComment);
+      if (_id) editComment(_id, newComment);
       setIsEditing(false);
     }
   };
+
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement>,
     data: TextAreaProps
@@ -40,6 +49,7 @@ const CommentDetail = ({
     e.preventDefault();
     setNewContent(data.value);
   };
+
   const renderButtons = () => {
     if (author === currentUser.userName) {
       return (
@@ -54,6 +64,7 @@ const CommentDetail = ({
       );
     }
   };
+
   return (
     <Container>
       <Comment>

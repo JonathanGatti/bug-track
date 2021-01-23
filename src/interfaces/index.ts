@@ -11,7 +11,7 @@ export interface Issue {
 }
 
 export interface Project {
-  _id?: string;
+  _id?: string | undefined;
   projectId: string | number;
   projectName: string;
   text: string;
@@ -23,19 +23,20 @@ export interface Author {
   _id?: string | number;
   userId: string;
   userName: string;
+  userProjects: string[];
   userPassword: string;
 }
 
-export interface CurrentUser {
-  isSignedIn?: boolean;
-  userId: string;
-  userName: string;
-}
-
-export interface Comment {
+export interface CommentInterface {
   _id?: string; 
-  authorId: string,
+  author: string,
   date?: Date,
   content: string,
   issueReference: string;
+}
+
+export interface CurrentUser {
+  isSignedIn?: boolean | null, 
+  userName: string, 
+  userId: string
 }

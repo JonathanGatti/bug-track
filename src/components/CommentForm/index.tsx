@@ -1,7 +1,18 @@
 import React from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, TextAreaProps, ButtonProps } from 'semantic-ui-react';
 
-const CommentForm = ({ onChange, onAddComment, action }: any) => {
+interface CommentFormProps {
+  onChange: (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    data: TextAreaProps
+  ) => void;
+  onAddComment: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    data: ButtonProps
+  ) => void;
+  action: string;
+}
+const CommentForm = ({ onChange, onAddComment, action }: CommentFormProps) => {
   return (
     <Form>
       <Form reply>
