@@ -20,6 +20,7 @@ interface IssueDetailProps {
   issue: Issue;
   editIssue: any;
   deleteIssue: (id: string) => void;
+  currentUser?: any;
 }
 
 const IssueDetail = ({
@@ -27,6 +28,7 @@ const IssueDetail = ({
   issue,
   deleteIssue,
   editIssue,
+  currentUser,
 }: IssueDetailProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isActive, setIsActive] = useState<boolean>(issue.active);
@@ -64,9 +66,9 @@ const IssueDetail = ({
   const handleEditButton = () => setIsEditing(true);
 
   const renderButtons = (issue: Issue) => {
-    if (!issue._id) {
-      return null;
-    } else {
+    if (!issue._id) return null;
+    if (!currentUser.isSignedIn) return null;
+    else {
       return (
         <>
           {!isEditing ? (

@@ -32,6 +32,17 @@ export const postUser = async (data: Author) => {
     console.log(err);
   }
 }
+
+export const patchUser = async (id: string, data: any) => {
+  try {
+    let res = await users.patch(`/users/${id}`, data);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 export const logIn = async (data: any) => {
   try {
     const res = await users.post('/users/login', 

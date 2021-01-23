@@ -1,4 +1,4 @@
-import {FETCH_USER,FETCH_USERS, CREATE_USER, DELETE_USER } from '../actions/types';
+import {FETCH_USER,FETCH_USERS, CREATE_USER, DELETE_USER, EDIT_USER } from '../actions/types';
 import { Author } from '../interfaces';
 import _ from 'lodash';
 
@@ -14,6 +14,8 @@ export const usersReducer = (state = {}, action: Action) => {
     case FETCH_USER:
       return {...state, [action.payload._id]: action.payload}
     case CREATE_USER:
+      return {...state, [action.payload._id]: action.payload}
+    case EDIT_USER:
       return {...state, [action.payload._id]: action.payload}
     case DELETE_USER:
       return _.omit(state, action.payload);

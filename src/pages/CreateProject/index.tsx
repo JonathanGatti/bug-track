@@ -83,7 +83,6 @@ const CreateProject = ({
                 Submit
               </Button>
             </Form>
-            <UsersList users={users} addUser={true} onClick={handleAddUser} />
           </Container>
         </>
       );

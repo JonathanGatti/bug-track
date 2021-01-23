@@ -30,7 +30,7 @@ const CreateIssue = ({
   currentUser,
 }: any) => {
   const [issueName, setIssueName] = useState('');
-  const [projectRef, setProjectRef] = useState<any>(' ');
+  const [projectRef, setProjectRef] = useState<any>('');
   const [priority, setPriority] = useState<any>(' ');
   const [description, setDescription] = useState<string | number | undefined>(
     ''
@@ -42,7 +42,7 @@ const CreateIssue = ({
   }, []);
 
   const handleSubmit = () => {
-    if (issueName === '' || description === '') {
+    if (issueName === '' || description === '' || projectRef === '') {
       setIsError(true);
     } else {
       const newIssue = {
@@ -116,6 +116,7 @@ const CreateIssue = ({
                 selection
                 options={projects}
                 onChange={handleProjectRefChange}
+                error={isError}
               />
             </Form.Field>
             <Form.Field>

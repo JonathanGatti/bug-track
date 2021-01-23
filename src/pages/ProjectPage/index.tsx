@@ -16,6 +16,7 @@ interface ProjectPageProps extends RouteComponentProps<MatchParams> {
   fetchProject: (id: string) => void;
   match: any;
   project: Project;
+  currentUser: any;
 }
 
 const ProjectPage = ({
@@ -23,6 +24,7 @@ const ProjectPage = ({
   match,
   fetchProject,
   project,
+  currentUser,
 }: ProjectPageProps) => {
   useEffect(() => {
     fetchProject(match.params.id);
@@ -32,7 +34,13 @@ const ProjectPage = ({
     if (!project) {
       return <Spinner />;
     } else {
-      return <ProjectDetail project={project} history={history} />;
+      return (
+        <ProjectDetail
+          project={project}
+          history={history}
+          currentUser={currentUser}
+        />
+      );
     }
   };
   return <div>{render()}</div>;
@@ -44,6 +52,9 @@ interface mapState {
 }
 
 const mapStateToProps = (state: any, ownProps: any) => {
-  return { project: state.projects![ownProps.match.params.id] };
+  return {
+    project: state.projects![ownProps.match.params.id],
+    currentUser: state.currentUser,
+  };
 };
 export default connect(mapStateToProps, { fetchProject })(ProjectPage);

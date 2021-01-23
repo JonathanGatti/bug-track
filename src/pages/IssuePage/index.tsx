@@ -16,9 +16,16 @@ interface IssuePageProps extends RouteComponentProps<MatchParams> {
   fetchIssue: (id: string) => void;
   match: any;
   issue: Issue;
+  currentUser: any;
 }
 
-const IssuePage = ({ history, match, fetchIssue, issue }: IssuePageProps) => {
+const IssuePage = ({
+  history,
+  match,
+  fetchIssue,
+  issue,
+  currentUser,
+}: IssuePageProps) => {
   useEffect(() => {
     fetchIssue(match.params.id);
   }, []);
@@ -29,7 +36,11 @@ const IssuePage = ({ history, match, fetchIssue, issue }: IssuePageProps) => {
     } else {
       return (
         <div>
-          <IssueDetail history={history} issue={issue} />
+          <IssueDetail
+            history={history}
+            issue={issue}
+            currentUser={currentUser}
+          />
         </div>
       );
     }
@@ -39,12 +50,16 @@ const IssuePage = ({ history, match, fetchIssue, issue }: IssuePageProps) => {
 
 interface State {
   issues: Issue[];
+  currentUser: any;
 }
 interface OwnProps {
   match: any;
 }
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
-  return { issue: state.issues![ownProps.match.params.id] };
+  return {
+    issue: state.issues![ownProps.match.params.id],
+    currentUser: state.currentUser,
+  };
 };
 export default connect(mapStateToProps, { fetchIssue })(IssuePage);
