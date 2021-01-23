@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { mapState } from './interfaces';
+import { CreateIssueProps, mapState } from './interfaces';
 import { createIssue } from '../../actions/issuesActions';
 import { fetchProjects, editProject } from '../../actions/projectsActions';
 import { priorities } from '../../utils/priorities';
@@ -35,7 +35,7 @@ const CreateIssue = ({
   fetchProjects,
   projects,
   currentUser,
-}: any) => {
+}: CreateIssueProps) => {
   const [issueName, setIssueName] = useState('');
   const [projectRef, setProjectRef] = useState<any>('');
   const [priority, setPriority] = useState<any>(' ');

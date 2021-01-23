@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button, Icon } from 'semantic-ui-react';
 import { Issue } from '../../interfaces';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 65vw;
+`;
 
 const RenderIssues = ({ list }: any) => {
   const renderIssueList = (obj: Issue) => {
@@ -33,19 +38,23 @@ const RenderIssues = ({ list }: any) => {
     }
   };
   return (
-    <Table definition>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>Issue Name</Table.HeaderCell>
-          <Table.HeaderCell>Author</Table.HeaderCell>
-          <Table.HeaderCell>Project Reference</Table.HeaderCell>
-          <Table.HeaderCell>Status</Table.HeaderCell>
-          <Table.HeaderCell>Priority</Table.HeaderCell>
-          <Table.HeaderCell />
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>{list.map((obj: Issue) => renderIssueList(obj))}</Table.Body>
-    </Table>
+    <Container>
+      <Table definition>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Issue Name</Table.HeaderCell>
+            <Table.HeaderCell>Author</Table.HeaderCell>
+            <Table.HeaderCell>Project Reference</Table.HeaderCell>
+            <Table.HeaderCell>Status</Table.HeaderCell>
+            <Table.HeaderCell>Priority</Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {list.map((obj: Issue) => renderIssueList(obj))}
+        </Table.Body>
+      </Table>
+    </Container>
   );
 };
 

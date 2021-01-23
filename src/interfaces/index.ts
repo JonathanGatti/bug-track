@@ -1,3 +1,5 @@
+import { ReactText } from "react";
+
 export interface Issue {
   _id?: string | number ;
   issueName: string;
@@ -20,7 +22,7 @@ export interface Project {
 }
 
 export interface Author {
-  _id?: string | number;
+  _id?:  ReactText | any;
   userId: string;
   userName: string;
   userProjects: string[];

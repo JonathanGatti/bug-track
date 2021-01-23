@@ -4,11 +4,10 @@ import { RouteComponentProps, StaticContext } from 'react-router';
 
 export interface CreateIssueProps {
   history: History<LocationState | any>;
-  createIssue: (data: Issue) => void;
+  createIssue: (data: any) => void;
   fetchProjects: () => void;
   projects: Project[];
-  _projectRef: string;
-  onAddIssue: (issueName: string, desc: string, priority: any) => void;
+  currentUser: CurrentUser;
 }
 
 export interface mapState {

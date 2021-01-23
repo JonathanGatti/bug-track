@@ -26,7 +26,7 @@ const UsersList = ({
   editUser,
   onToggleIsListShowing,
 }: UsersListProps) => {
-  const handleAddUser = (user: any) => {
+  const handleAddUser = (user: Author) => {
     const includes = user.userProjects.includes(projectRef);
     if (includes && onToggleIsListShowing) onToggleIsListShowing();
     else {
@@ -36,6 +36,16 @@ const UsersList = ({
       editUser(user._id, editedUser);
     }
     if (onToggleIsListShowing) onToggleIsListShowing();
+  };
+
+  const handleDeleteUser = (user: Author) => {
+    const newProjects = user.userProjects.filter(
+      (project: string) => project !== projectRef
+    );
+    const editedUser = {
+      userProjects: newProjects,
+    };
+    editUser(user._id, editedUser);
   };
 
   const renderList = (user: Author) => {
@@ -54,11 +64,21 @@ const UsersList = ({
                 Add User
               </Button>
             ) : (
-              <Link to={`/user/${user.userId}`}>
-                <Button inverted color="green">
-                  View User
+              <>
+                <Link to={`/user/${user._id}`}>
+                  <Button size="small" inverted color="green">
+                    View User
+                  </Button>
+                </Link>
+                <Button
+                  onClick={() => handleDeleteUser(user)}
+                  size="small"
+                  inverted
+                  color="red"
+                >
+                  Remove User
                 </Button>
-              </Link>
+              </>
             )}
           </Table.Cell>
         </Table.Row>

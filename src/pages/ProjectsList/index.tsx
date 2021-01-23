@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import List from '../../components/List';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../../actions/projectsActions';
 import styled from 'styled-components';
 import { Project } from '../../interfaces';
 import { mediaQueries } from '../../styles/mediaQueries';
+import RenderProjects from '../../components/RenderProjects';
 
 const Container = styled.div`
   width: 75vw;
@@ -29,7 +29,7 @@ const ProjectsList = ({ fetchProjects, projects }: ProjectListProps) => {
   return (
     <Container>
       <h3>Projects List</h3>
-      <List items={projects} />
+      <RenderProjects list={projects} />
     </Container>
   );
 };

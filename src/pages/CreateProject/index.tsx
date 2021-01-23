@@ -8,6 +8,7 @@ import { Project } from '../../interfaces';
 import { generateId } from '../../utils/generateId';
 import styled from 'styled-components';
 import LogInWarning from '../../common/logInWarning';
+import { CreateProjectProps, mapState } from './interfaces';
 
 const Container = styled.div`
   max-width: 40vw;
@@ -22,7 +23,7 @@ const CreateProject = ({
   issues,
   createProject,
   currentUser,
-}: any) => {
+}: CreateProjectProps) => {
   const [projectName, setProjectName] = useState('');
   const [isError, setIsError] = useState(false);
   const projectId = generateId();
@@ -82,7 +83,7 @@ const CreateProject = ({
   return <div>{render()}</div>;
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: mapState) => {
   return {
     issues: Object.values(state.issues),
     users: Object.values(state.users),

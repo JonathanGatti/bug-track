@@ -2,15 +2,10 @@ import React, { useEffect } from 'react';
 import { HomeContainer } from './styles';
 import { connect } from 'react-redux';
 import VerticalHeader from '../../components/VerticalHeader';
-import List from '../../components/List';
 import { fetchIssues } from '../../actions/issuesActions';
 import { Issue } from '../../interfaces';
 import { fetchUsers } from '../../actions/usersActions';
-import {
-  deleteAllUsers,
-  deleteAllProjects,
-  deleteAllIssues,
-} from '../../utils/database';
+import RenderIssues from '../../components/RenderIssues';
 
 interface HomePageProps {
   fetchIssues: () => void;
@@ -22,11 +17,11 @@ const HomePage = ({ fetchIssues, issues, fetchUsers }: HomePageProps) => {
   useEffect(() => {
     fetchIssues();
     fetchUsers();
-  }, [issues.length]);
+  }, []);
   return (
     <HomeContainer>
       <VerticalHeader />
-      <List items={issues} />
+      <RenderIssues list={issues} />
     </HomeContainer>
   );
 };

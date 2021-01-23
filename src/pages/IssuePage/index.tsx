@@ -4,7 +4,7 @@ import IssueDetail from '../../components/Issue';
 import { fetchIssue } from '../../actions/issuesActions';
 import { connect } from 'react-redux';
 import Spinner from '../../common/spinner';
-import { Issue } from '../../interfaces';
+import { CurrentUser, Issue } from '../../interfaces';
 import { History, LocationState } from 'history';
 
 interface MatchParams {
@@ -16,7 +16,7 @@ interface IssuePageProps extends RouteComponentProps<MatchParams> {
   fetchIssue: (id: string) => void;
   match: any;
   issue: Issue;
-  currentUser: any;
+  currentUser: CurrentUser;
 }
 
 const IssuePage = ({
@@ -50,7 +50,7 @@ const IssuePage = ({
 
 interface State {
   issues: Issue[];
-  currentUser: any;
+  currentUser: CurrentUser;
 }
 interface OwnProps {
   match: any;

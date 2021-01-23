@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StaticContext, RouteComponentProps } from 'react-router';
 import ProjectDetail from '../../components/ProjectDetail';
-import { Project } from '../../interfaces';
+import { CurrentUser, Project } from '../../interfaces';
 import { connect } from 'react-redux';
 import { fetchProject } from '../../actions/projectsActions';
 import Spinner from '../../common/spinner';
@@ -16,7 +16,7 @@ interface ProjectPageProps extends RouteComponentProps<MatchParams> {
   fetchProject: (id: string) => void;
   match: any;
   project: Project;
-  currentUser: any;
+  currentUser: CurrentUser;
 }
 
 const ProjectPage = ({
@@ -45,11 +45,6 @@ const ProjectPage = ({
   };
   return <div>{render()}</div>;
 };
-
-interface mapState {
-  state: Project[] | any;
-  ownProps: RouteComponentProps<any, StaticContext, unknown>;
-}
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {

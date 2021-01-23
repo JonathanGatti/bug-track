@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import List from '../List';
 import UsersList from '../UsersList';
 import { deleteProject } from '../../actions/projectsActions';
 import { fetchIssues } from '../../actions/issuesActions';
@@ -10,6 +9,7 @@ import { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
 import { Author, Issue } from '../../interfaces';
 import { ProjectDetailProps, mapState } from './interfaces';
+import RenderIssues from '../RenderIssues';
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +34,6 @@ const ProjectDetail = ({
   const [projectIssues, setProjectIssues] = useState<any>([]);
   const [isListShowig, setIsListShowing] = useState(false);
   const [projectUsers, setProjectUsers] = useState<any>([]);
-
   useEffect(() => {
     fetchIssues();
     fetchUsers();
@@ -69,7 +68,7 @@ const ProjectDetail = ({
     <>
       <h2>{project.projectName}</h2>
       <Container>
-        <List items={projectIssues} />
+        <RenderIssues list={projectIssues} />
         <TableContainer>
           <Table>
             <Table.Header>
