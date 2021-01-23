@@ -16,14 +16,12 @@ const Container = styled.div`
 interface UsersListProps {
   users: Author[];
   addUser: boolean;
-  onClick?: (user: Author) => void;
   projectRef: string;
   editUser: (id: string, data: any) => void;
 }
 const UsersList = ({
   users,
   addUser,
-  onClick,
   projectRef,
   editUser,
 }: UsersListProps) => {
@@ -34,33 +32,37 @@ const UsersList = ({
     editUser(user._id, editedUser);
   };
 
+  const renderList = (user: any) => {
+    if (!user.userProjects) return null;
+    else {
+      return (
+        <Table.Row>
+          <Table.Cell>{user.userName}</Table.Cell>
+          <Table.Cell>
+            {addUser ? (
+              <Button
+                inverted
+                color="green"
+                onClick={() => handleAddUser(user)}
+              >
+                Add User
+              </Button>
+            ) : (
+              <Link to={`/user/${user.userId}`}>
+                <Button inverted color="green">
+                  View User
+                </Button>
+              </Link>
+            )}
+          </Table.Cell>
+        </Table.Row>
+      );
+    }
+  };
   return (
     <Container>
       <Table>
-        <Table.Body>
-          {users.map((user: Author) => (
-            <Table.Row>
-              <Table.Cell>{user.userName}</Table.Cell>
-              <Table.Cell>
-                {addUser ? (
-                  <Button
-                    inverted
-                    color="green"
-                    onClick={() => handleAddUser(user)}
-                  >
-                    Add User
-                  </Button>
-                ) : (
-                  <Link to={`/user/${user.userId}`}>
-                    <Button inverted color="green">
-                      View User
-                    </Button>
-                  </Link>
-                )}
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
+        <Table.Body>{users.map((user: Author) => renderList(user))}</Table.Body>
       </Table>
     </Container>
   );

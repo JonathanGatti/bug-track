@@ -36,9 +36,11 @@ const ProjectDetail = ({
     let newUsers: any = [];
 
     users.forEach((user: any) => {
-      for (let i = 0; i < user.userProjects.length; i++) {
-        if (user.userProjects[i] === project.projectName) {
-          newUsers.push(user);
+      if (user.userProjects) {
+        for (let i = 0; i < user.userProjects.length; i++) {
+          if (user.userProjects[i] === project.projectName) {
+            newUsers.push(user);
+          }
         }
       }
     });
