@@ -5,4 +5,5 @@ export const AppContainer = styled.div`
   height: 100vh;
   margin-left: auto;
   margin-right: auto;
+  background:rgb(100,100,100);
 `

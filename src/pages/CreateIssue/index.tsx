@@ -35,23 +35,28 @@ const CreateIssue = ({
   const [description, setDescription] = useState<string | number | undefined>(
     ''
   );
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     fetchProjects();
   }, []);
 
   const handleSubmit = () => {
-    const newIssue = {
-      issueName: issueName,
-      issueId: generateId(),
-      author: currentUser.userName,
-      project: projectRef,
-      description: description,
-      active: true,
-      priority: priority,
-    };
-    createIssue(newIssue);
-    history.push('/');
+    if (issueName === '' || description === '') {
+      setIsError(true);
+    } else {
+      const newIssue = {
+        issueName: issueName,
+        issueId: generateId(),
+        author: currentUser.userName,
+        project: projectRef,
+        description: description,
+        active: true,
+        priority: priority,
+      };
+      createIssue(newIssue);
+      history.push('/');
+    }
   };
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIssueName(e.target.value);
@@ -92,6 +97,7 @@ const CreateIssue = ({
                 required
                 onChange={handleNameChange}
                 placeholder="Issue Name"
+                error={isError ? { content: 'This field is Required' } : null}
               />
             </Form.Field>
             <Form.Field>
@@ -99,6 +105,7 @@ const CreateIssue = ({
               <Form.TextArea
                 onChange={handleDescriptionChange}
                 placeholder="Description"
+                error={isError ? { content: 'This field is Required' } : null}
               />
             </Form.Field>
             <Form.Field>

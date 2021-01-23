@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StaticContext, RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import IssueDetail from '../../components/Issue';
 import { fetchIssue } from '../../actions/issuesActions';
 import { connect } from 'react-redux';

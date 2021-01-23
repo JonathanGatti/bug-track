@@ -29,6 +29,7 @@ const CreateProject = ({
 }: any) => {
   const [team, setTeam] = useState<Author[]>([]);
   const [projectName, setProjectName] = useState('');
+  const [isError, setIsError] = useState(false);
   const projectId = generateId();
 
   useEffect(() => {
@@ -44,15 +45,19 @@ const CreateProject = ({
   };
 
   const handleClick = () => {
-    const newProject: Project = {
-      teamMembers: team,
-      projectId: projectId,
-      projectName: projectName,
-      text: projectName,
-      value: projectName,
-    };
-    createProject(newProject);
-    history.push('/');
+    if (projectName === '') {
+      setIsError(true);
+    } else {
+      const newProject: Project = {
+        teamMembers: team,
+        projectId: projectId,
+        projectName: projectName,
+        text: projectName,
+        value: projectName,
+      };
+      createProject(newProject);
+      history.push('/');
+    }
   };
   const handleAddUser = (user: Author) => {
     setTeam([...team, user]);
@@ -68,7 +73,11 @@ const CreateProject = ({
             <Form>
               <Form.Field>
                 <label>Project Name</label>
-                <Form.Input onChange={handleChange} placeholder="First Name" />
+                <Form.Input
+                  onChange={handleChange}
+                  placeholder="Project Name"
+                  error={isError ? { content: 'This field is Required' } : null}
+                />
               </Form.Field>
               <Button color="blue" onClick={handleClick} type="submit">
                 Submit

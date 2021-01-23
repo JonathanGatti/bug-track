@@ -15,7 +15,6 @@ const CreateComment = ({
 
   const handleAddComment = () => {
     if (content !== '') {
-      console.log('hi');
       const newComment = {
         author: currentUser.userName,
         content: content,

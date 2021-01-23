@@ -19,9 +19,7 @@ const CommentsList = ({
       return comment.issueReference === issueRef;
     });
     return referencedComments.map((comment: any) => (
-      <>
-        <CommentDetail comment={comment} currentUser={currentUser} />
-      </>
+      <CommentDetail comment={comment} currentUser={currentUser} />
     ));
   };
   return (
