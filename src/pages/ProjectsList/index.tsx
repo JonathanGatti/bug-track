@@ -4,13 +4,17 @@ import { connect } from 'react-redux';
 import { fetchProjects } from '../../actions/projectsActions';
 import styled from 'styled-components';
 import { Project } from '../../interfaces';
+import { mediaQueries } from '../../styles/mediaQueries';
 
 const Container = styled.div`
-  width: 70vw;
+  width: 75vw;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: column;
+  @media ${mediaQueries.laptop} {
+    width: 90vw;
+  }
 `;
 
 interface ProjectListProps {

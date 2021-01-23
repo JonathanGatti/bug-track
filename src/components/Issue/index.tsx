@@ -7,6 +7,7 @@ import {
   Form,
   Dropdown,
   DropdownProps,
+  TextAreaProps,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { deleteIssue, editIssue } from '../../actions/issuesActions';
@@ -47,7 +48,10 @@ const IssueDetail = ({
     setPriority(data.value);
   };
 
-  const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleDescriptionChange = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+    data: TextAreaProps
+  ) => {
     setDescription(e.target.value);
   };
 
@@ -133,7 +137,7 @@ const IssueDetail = ({
       return (
         <Form.Field>
           <label>Description</label>
-          <Form.Input
+          <Form.TextArea
             onChange={handleDescriptionChange}
             placeholder="Description"
             value={description}

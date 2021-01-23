@@ -1,7 +1,6 @@
-import React, { useState, useEffect, Dispatch } from 'react';
-import { Table } from 'semantic-ui-react';
+import React from 'react';
+import { Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Author } from '../../interfaces';
 import { editUser } from '../../actions/usersActions';
@@ -9,7 +8,7 @@ import { connect } from 'react-redux';
 
 const Container = styled.div`
   max-width: 40vw;
-  max-height: 40vh;
+  max-height: 23vh;
   overflow: scroll;
 `;
 

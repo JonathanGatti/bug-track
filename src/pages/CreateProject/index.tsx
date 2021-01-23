@@ -4,16 +4,13 @@ import { connect } from 'react-redux';
 import { fetchUsers } from '../../actions/usersActions';
 import { createProject } from '../../actions/projectsActions';
 import { createIssue, fetchIssues } from '../../actions/issuesActions';
-import { Author, Issue, Project } from '../../interfaces';
+import { Project } from '../../interfaces';
 import { generateId } from '../../utils/generateId';
-import UsersList from '../../components/UsersList';
 import styled from 'styled-components';
 import LogInWarning from '../../common/logInWarning';
 
 const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 60vw;
+  max-width: 40vw;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -23,11 +20,9 @@ const CreateProject = ({
   fetchUsers,
   fetchIssues,
   issues,
-  users,
   createProject,
   currentUser,
 }: any) => {
-  const [team, setTeam] = useState<Author[]>([]);
   const [projectName, setProjectName] = useState('');
   const [isError, setIsError] = useState(false);
   const projectId = generateId();
@@ -49,7 +44,6 @@ const CreateProject = ({
       setIsError(true);
     } else {
       const newProject: Project = {
-        teamMembers: team,
         projectId: projectId,
         projectName: projectName,
         text: projectName,
@@ -58,9 +52,6 @@ const CreateProject = ({
       createProject(newProject);
       history.push('/');
     }
-  };
-  const handleAddUser = (user: Author) => {
-    setTeam([...team, user]);
   };
 
   const render = () => {
@@ -80,7 +71,7 @@ const CreateProject = ({
                 />
               </Form.Field>
               <Button color="blue" onClick={handleClick} type="submit">
-                Submit
+                Create Project
               </Button>
             </Form>
           </Container>

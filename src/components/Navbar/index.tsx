@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
@@ -22,9 +22,16 @@ const Navbar = ({ logOutUser, currentUser }: any) => {
       );
     } else {
       return (
-        <Button onClick={handleLogOut} inverted color="red">
-          Log Out
-        </Button>
+        <>
+          {currentUser ? (
+            <Menu.Item position="right">
+              Welcome back {currentUser.userName}
+            </Menu.Item>
+          ) : null}
+          <Button onClick={handleLogOut} inverted color="red">
+            Log Out
+          </Button>
+        </>
       );
     }
   };

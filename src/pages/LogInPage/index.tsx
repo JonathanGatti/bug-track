@@ -7,6 +7,13 @@ import { logInUser } from '../../actions/currentUserActions';
 import UserForm from '../../components/UserForm';
 import { CurrentUser } from '../../interfaces';
 import ModalTemplate from '../../components/Modal';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 interface LogInPageProps {
   history: History<LocationState>;
@@ -17,7 +24,6 @@ const LogInPage = ({ history, logInUser }: LogInPageProps) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-
   const handleNameChange = (
     e: ChangeEvent<HTMLInputElement>,
     data: InputOnChangeData
@@ -49,7 +55,7 @@ const LogInPage = ({ history, logInUser }: LogInPageProps) => {
     }
   };
   return (
-    <div>
+    <Container>
       <h2>Log In</h2>
       <ModalTemplate
         open={isOpen}
@@ -60,8 +66,9 @@ const LogInPage = ({ history, logInUser }: LogInPageProps) => {
         onNameChange={handleNameChange}
         onPasswordChange={handlePasswordChange}
         onClick={handleClick}
+        isError={false}
       />
-    </div>
+    </Container>
   );
 };
 

@@ -19,8 +19,8 @@ const VerticalHeader = () => {
       </Menu.Item>
       <Menu.Item name="users">
         <Link to="/create/user">
-          <Menu.Header as="h4">User</Menu.Header>
-          <p>Add New User</p>
+          <Menu.Header as="h4">Sign Up</Menu.Header>
+          <p>Create a New Account</p>
         </Link>
       </Menu.Item>
     </Menu>

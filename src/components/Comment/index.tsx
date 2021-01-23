@@ -3,6 +3,11 @@ import { Comment, Button, TextAreaProps } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { editComment, deleteComment } from '../../actions/commentsActions';
 import CommentForm from '../CommentForm';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+`;
 
 const CommentDetail = ({
   comment,
@@ -38,36 +43,43 @@ const CommentDetail = ({
   const renderButtons = () => {
     if (author === currentUser.userName) {
       return (
-        <Button.Group>
+        <>
           <Button inverted color="green" onClick={() => setIsEditing(true)}>
             Edit
           </Button>
           <Button inverted color="red" onClick={() => handleDeleteButton(_id)}>
             Delete
           </Button>
-        </Button.Group>
+        </>
       );
     }
   };
   return (
-    <Comment>
-      <Comment.Content>
-        <Comment.Author as="a">{author}</Comment.Author>
-        <Comment.Metadata>
-          <div>{date}</div>
-        </Comment.Metadata>
-        {!isEditing ? (
-          <Comment.Text>{content}</Comment.Text>
-        ) : (
-          <CommentForm
-            onChange={handleChange}
-            onAddComment={handleEditComment}
-            action="Edit"
-          />
-        )}
-      </Comment.Content>
-      {renderButtons()}
-    </Comment>
+    <Container>
+      <Comment>
+        <Comment.Content>
+          <Comment.Author as="a">{author}</Comment.Author>
+          <Comment.Metadata>
+            <div>{date}</div>
+          </Comment.Metadata>
+          {!isEditing ? (
+            <>
+              <Comment.Text>
+                <div>
+                  {content} {renderButtons()}
+                </div>
+              </Comment.Text>
+            </>
+          ) : (
+            <CommentForm
+              onChange={handleChange}
+              onAddComment={handleEditComment}
+              action="Edit"
+            />
+          )}
+        </Comment.Content>
+      </Comment>
+    </Container>
   );
 };
 

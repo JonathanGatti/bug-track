@@ -15,11 +15,18 @@ import {
 import { generateId } from '../../utils/generateId';
 import styled from 'styled-components';
 import LogInWarning from '../../common/logInWarning';
+import { mediaQueries } from '../../styles/mediaQueries';
 
 const Container = styled.div`
   max-width: 60vw;
   margin-right: auto;
   margin-left: auto;
+  .submit-button {
+    margin-top: 2em;
+  }
+  @media ${mediaQueries.tablet} {
+    max-width: 80vw;
+  }
 `;
 
 const CreateIssue = ({
@@ -131,12 +138,12 @@ const CreateIssue = ({
             </Form.Field>
           </Form>
           <Button
-            disabled={false}
+            className="submit-button"
             type="submit"
             color="blue"
             onClick={handleSubmit}
           >
-            Submit
+            Create Issue
           </Button>
         </Container>
       );

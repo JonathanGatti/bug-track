@@ -7,8 +7,7 @@ import RenderProjects from '../RenderProjects';
 import Spinner from '../../common/spinner';
 
 const ListContainer = styled.div`
-  width: 70vw;
-  margin-left: auto;
+  width: 100%;
 `;
 
 interface ListProps {

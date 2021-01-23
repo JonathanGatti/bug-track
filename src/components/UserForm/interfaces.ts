@@ -11,4 +11,5 @@ export interface UserFormProps {
     data: InputOnChangeData
   ) => void;
   onClick: () => void;
+  isError?: boolean;
 }
