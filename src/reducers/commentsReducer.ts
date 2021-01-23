@@ -1,6 +1,6 @@
 import {FETCH_COMMENTS, FETCH_COMMENT, CREATE_COMMENT, DELETE_COMMENT, EDIT_COMMENT} from '../actions/types';
 import _ from 'lodash';
-import {Comment} from '../interfaces';
+import {CommentInterface} from '../interfaces';
 
 interface Action {
   type: string,

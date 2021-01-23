@@ -38,7 +38,7 @@ const UsersList = ({
     if (onToggleIsListShowing) onToggleIsListShowing();
   };
 
-  const renderList = (user: any) => {
+  const renderList = (user: Author) => {
     if (!user.userProjects) return null;
     else {
       return (

@@ -4,8 +4,14 @@ import { Menu } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { logOutUser } from '../../actions/currentUserActions';
+import { CurrentUser } from '../../interfaces';
 
-const Navbar = ({ logOutUser, currentUser }: any) => {
+interface NavbarProps {
+  logOutUser: () => void;
+  currentUser: CurrentUser;
+}
+
+const Navbar = ({ logOutUser, currentUser }: NavbarProps) => {
   const handleLogOut = () => {
     logOutUser();
   };
@@ -55,7 +61,11 @@ const Navbar = ({ logOutUser, currentUser }: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
+interface mapState {
+  currentUser: CurrentUser;
+}
+
+const mapStateToProps = (state: mapState) => {
   return { currentUser: state.currentUser };
 };
 export default connect(mapStateToProps, { logOutUser })(Navbar);

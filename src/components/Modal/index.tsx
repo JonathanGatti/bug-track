@@ -1,7 +1,13 @@
 import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 
-function ModalTemplate({ open, onOpen, content }: any) {
+interface ModelTemplateProps {
+  open: boolean;
+  onOpen: (value: boolean) => void;
+  content: string;
+}
+
+function ModalTemplate({ open, onOpen, content }: ModelTemplateProps) {
   return (
     <Modal centered={false} open={open}>
       <Modal.Header>Something Went Wrong</Modal.Header>

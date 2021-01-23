@@ -4,13 +4,21 @@ import { createComment } from '../../actions/commentsActions';
 import { connect } from 'react-redux';
 import CommentForm from '../CommentForm';
 import LogInWarning from '../../common/logInWarning';
+import { CommentInterface, CurrentUser } from '../../interfaces';
+
+interface CreateCommentProps {
+  createComment: (data: CommentInterface | any) => void;
+  currentUser: CurrentUser;
+  setOnCommenting: (value: boolean) => void;
+  issueRef: string;
+}
 
 const CreateComment = ({
   createComment,
   currentUser,
   setOnCommenting,
   issueRef,
-}: any) => {
+}: CreateCommentProps) => {
   const [content, setContent] = useState<string | undefined | number>('');
 
   const handleAddComment = () => {
@@ -47,6 +55,10 @@ const CreateComment = ({
   };
   return <>{render()}</>;
 };
+
+interface mapState {
+  currentUser: CurrentUser;
+}
 
 const mapStateToProps = (state: any) => {
   return { currentUser: state.currentUser };

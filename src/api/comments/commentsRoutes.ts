@@ -1,4 +1,4 @@
-import { Comment } from '../../interfaces';
+import {  CommentInterface } from '../../interfaces';
 import comments from '../baseUrl';
 
 export const getComments = async () => {
@@ -18,7 +18,7 @@ export const getComment = async (id: string) => {
     console.log(err);
   }
 }
-export const postComment = async (data: Comment) => {
+export const postComment = async (data: CommentInterface) => {
   try {
     const res = await comments.post('/comments', 
     data

@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 import { fetchComments } from '../../actions/commentsActions';
 import { Comment, Header } from 'semantic-ui-react';
 import CommentDetail from '../Comment';
+import { CommentInterface, CurrentUser } from '../../interfaces';
+
+interface CommentListProps {
+  issueRef: string;
+  fetchComments: () => void;
+  comments: CommentInterface[];
+  currentUser: CurrentUser;
+}
 
 const CommentsList = ({
   issueRef,
   fetchComments,
   comments,
   currentUser,
-}: any) => {
+}: CommentListProps) => {
   useEffect(() => {
     fetchComments();
   }, []);
@@ -32,7 +40,12 @@ const CommentsList = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
+interface mapState {
+  comments: CommentInterface[];
+  currentUser: CurrentUser;
+}
+
+const mapStateToProps = (state: mapState) => {
   return {
     comments: Object.values(state.comments),
     currentUser: state.currentUser,
