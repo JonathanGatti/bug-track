@@ -58,7 +58,7 @@ interface OwnProps {
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return {
-    issue: state.issues![ownProps.match.params.id],
+    issue: state.issues[ownProps.match.params.id],
     currentUser: state.currentUser,
   };
 };

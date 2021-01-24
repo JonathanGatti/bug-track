@@ -26,7 +26,7 @@ export const editComment = (id: any, data: any) => async (dispatch: Dispatch) =>
     dispatch({type: EDIT_COMMENT, payload: res})
   }
 
-export const deleteComment = (id: string) => (dispatch: Dispatch) => {
-  deleteCommentById(id);
+export const deleteComment = (id: string) => async (dispatch: Dispatch) => {
+  await deleteCommentById(id);
   dispatch({type: DELETE_COMMENT, payload: id})
 }

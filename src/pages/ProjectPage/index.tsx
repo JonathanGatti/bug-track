@@ -48,7 +48,7 @@ const ProjectPage = ({
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
-    project: state.projects![ownProps.match.params.id],
+    project: state.projects[ownProps.match.params.id],
     currentUser: state.currentUser,
   };
 };

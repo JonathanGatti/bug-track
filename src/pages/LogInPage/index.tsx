@@ -42,12 +42,12 @@ const LogInPage = ({ history, logInUser }: LogInPageProps) => {
       userPassword: password,
     };
     const res = await logIn(credentials);
-    if (!res || res!.data === 'Not Allowed') {
+    if (!res || res.data === 'Not Allowed') {
       setIsOpen(true);
       return;
     } else {
       const currentUser = {
-        userId: res!.data,
+        userId: res.data,
         userName: credentials.userName,
       };
       logInUser(currentUser);
