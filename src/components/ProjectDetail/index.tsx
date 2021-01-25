@@ -112,9 +112,6 @@ const ProjectDetail = ({
   );
 };
 
-const mapStateToProps = (state: mapState) => {
-  return {};
-};
 export default connect(null, {
   deleteProject,
   fetchIssues,

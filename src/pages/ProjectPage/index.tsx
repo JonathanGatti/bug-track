@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
 import ProjectDetail from '../../components/ProjectDetail';
 import { CurrentUser, Project, Author, Issue } from '../../interfaces';
