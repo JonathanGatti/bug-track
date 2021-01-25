@@ -25,18 +25,14 @@ const ProjectDetail = ({
   history,
   project,
   deleteProject,
-  fetchIssues,
   issues,
   currentUser,
-  fetchUsers,
   users,
 }: ProjectDetailProps) => {
   const [projectIssues, setProjectIssues] = useState<any>([]);
   const [isListShowig, setIsListShowing] = useState(false);
   const [projectUsers, setProjectUsers] = useState<any>([]);
   useEffect(() => {
-    fetchIssues();
-    fetchUsers();
     let newUsers: Author[] = [];
 
     users.forEach((user: Author) => {
@@ -49,11 +45,15 @@ const ProjectDetail = ({
       }
     });
     setProjectUsers([...newUsers]);
+  }, []);
+
+  useEffect(() => {
     const _projectIssues = issues.filter((issues: Issue) => {
       return issues.project === project.projectName;
     });
     setProjectIssues([..._projectIssues]);
-  }, []);
+    console.log(issues);
+  }, [projectIssues.length]);
 
   const handleClick = (id: string | undefined) => {
     if (!id) return null;
@@ -113,12 +113,9 @@ const ProjectDetail = ({
 };
 
 const mapStateToProps = (state: mapState) => {
-  return {
-    issues: Object.values(state.issues),
-    users: Object.values(state.users),
-  };
+  return {};
 };
-export default connect(mapStateToProps, {
+export default connect(null, {
   deleteProject,
   fetchIssues,
   fetchUsers,

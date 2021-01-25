@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { StaticContext, RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import ProjectDetail from '../../components/ProjectDetail';
-import { CurrentUser, Project } from '../../interfaces';
+import { CurrentUser, Project, Author, Issue } from '../../interfaces';
 import { connect } from 'react-redux';
 import { fetchProject } from '../../actions/projectsActions';
+import { fetchIssues } from '../../actions/issuesActions';
+import { fetchUsers } from '../../actions/usersActions';
 import Spinner from '../../common/spinner';
 import { History, LocationState } from 'history';
 
@@ -16,17 +18,27 @@ interface ProjectPageProps extends RouteComponentProps<MatchParams> {
   fetchProject: (id: string) => void;
   match: any;
   project: Project;
-  currentUser: CurrentUser;
+  currentUser: CurrentUser | any;
+  fetchUsers: () => void | any;
+  users: Author[] | any;
+  fetchIssues: () => void | any;
+  issues: Issue[] | any;
 }
 
 const ProjectPage = ({
   history,
   match,
   fetchProject,
+  fetchIssues,
+  fetchUsers,
   project,
+  issues,
+  users,
   currentUser,
 }: ProjectPageProps) => {
   useEffect(() => {
+    fetchIssues();
+    fetchUsers();
     fetchProject(match.params.id);
   }, []);
 
@@ -39,6 +51,8 @@ const ProjectPage = ({
           project={project}
           history={history}
           currentUser={currentUser}
+          issues={issues}
+          users={users}
         />
       );
     }
@@ -50,6 +64,12 @@ const mapStateToProps = (state: any, ownProps: any) => {
   return {
     project: state.projects[ownProps.match.params.id],
     currentUser: state.currentUser,
+    issues: Object.values(state.issues),
+    users: Object.values(state.users),
   };
 };
-export default connect(mapStateToProps, { fetchProject })(ProjectPage);
+export default connect(mapStateToProps, {
+  fetchProject,
+  fetchIssues,
+  fetchUsers,
+})(ProjectPage);

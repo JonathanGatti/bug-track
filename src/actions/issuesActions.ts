@@ -26,7 +26,7 @@ export const editIssue = (id: any, data: Issue) => async (dispatch: Dispatch) =>
     dispatch({type: EDIT_ISSUE, payload: res})
   }
 
-export const deleteIssue = (id: string) => (dispatch: Dispatch) => {
-  deleteIssueById(id);
+export const deleteIssue = (id: string) => async (dispatch: Dispatch) => {
+  await deleteIssueById(id);
   dispatch({type: DELETE_ISSUE, payload: id})
 }
