@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/bug-track/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/bug-track/static/js/main.e98dcee2.chunk.js",
+    "main.js.map": "/bug-track/static/js/main.e98dcee2.chunk.js.map",
+    "runtime-main.js": "/bug-track/static/js/runtime-main.889ba6bf.js",
+    "runtime-main.js.map": "/bug-track/static/js/runtime-main.889ba6bf.js.map",
+    "static/css/2.647f26f6.chunk.css": "/bug-track/static/css/2.647f26f6.chunk.css",
+    "static/js/2.e1b5b7e2.chunk.js": "/bug-track/static/js/2.e1b5b7e2.chunk.js",
+    "static/js/2.e1b5b7e2.chunk.js.map": "/bug-track/static/js/2.e1b5b7e2.chunk.js.map",
+    "static/js/3.0f435d21.chunk.js": "/bug-track/static/js/3.0f435d21.chunk.js",
+    "static/js/3.0f435d21.chunk.js.map": "/bug-track/static/js/3.0f435d21.chunk.js.map",
+    "index.html": "/bug-track/index.html",
+    "static/css/2.647f26f6.chunk.css.map": "/bug-track/static/css/2.647f26f6.chunk.css.map",
+    "static/css/main.6dea0f05.chunk.css.map": "/bug-track/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.e1b5b7e2.chunk.js.LICENSE.txt": "/bug-track/static/js/2.e1b5b7e2.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/bug-track/static/media/outline-icons.ddae9b1b.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.889ba6bf.js",
+    "static/css/2.647f26f6.chunk.css",
+    "static/js/2.e1b5b7e2.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.e98dcee2.chunk.js"
+  ]
+}
