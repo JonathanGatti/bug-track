@@ -5,6 +5,7 @@ import { editComment, deleteComment } from '../../actions/commentsActions';
 import CommentForm from '../CommentForm';
 import styled from 'styled-components';
 import { CommentInterface, CurrentUser } from '../../interfaces';
+import DeleteConfirmation from '../DeleteConfirmation';
 
 const Container = styled.div`
   display: flex;

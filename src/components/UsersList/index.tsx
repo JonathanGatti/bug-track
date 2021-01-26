@@ -49,6 +49,7 @@ const UsersList = ({
   };
 
   const renderList = (user: Author) => {
+    if (!user._id) return null;
     if (!user.userProjects) return null;
     else {
       return (
