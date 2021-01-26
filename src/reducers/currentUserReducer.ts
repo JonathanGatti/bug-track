@@ -1,9 +1,9 @@
 import {LOG_IN, LOG_OUT} from '../actions/types';
 
 const INITIAL_STATE = {
-  isSignedIn: null,
-  userId: null,
-  userName: null
+  isSignedIn: true,
+  userId: '_imnlsplqf',
+  userName: 'admin'
 }
 export const currentUserReducer = (state = INITIAL_STATE, action: any ) => {
   switch(action.type){
