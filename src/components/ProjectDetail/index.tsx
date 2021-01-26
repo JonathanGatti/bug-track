@@ -45,14 +45,13 @@ const ProjectDetail = ({
       }
     });
     setProjectUsers([...newUsers]);
-  }, []);
+  }, [projectUsers]);
 
   useEffect(() => {
     const _projectIssues = issues.filter((issues: Issue) => {
       return issues.project === project.projectName;
     });
     setProjectIssues([..._projectIssues]);
-    console.log(issues);
   }, [projectIssues.length]);
 
   const handleClick = (id: string | undefined) => {
