@@ -6,6 +6,7 @@ import { fetchIssues } from '../../actions/issuesActions';
 import { Issue } from '../../interfaces';
 import { fetchUsers } from '../../actions/usersActions';
 import RenderIssues from '../../components/RenderIssues';
+import Spinner from '../../common/spinner';
 
 interface HomePageProps {
   fetchIssues: () => void;
@@ -18,10 +19,19 @@ const HomePage = ({ fetchIssues, issues, fetchUsers }: HomePageProps) => {
     fetchIssues();
     fetchUsers();
   }, []);
+
+  const render = () => {
+    if (!issues) return null;
+    if (issues.length <= 0) {
+      return <Spinner />;
+    } else {
+      return <RenderIssues list={issues} />;
+    }
+  };
   return (
     <HomeContainer>
       <VerticalHeader />
-      <RenderIssues list={issues} />
+      {render()}
     </HomeContainer>
   );
 };

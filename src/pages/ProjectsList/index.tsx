@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Project } from '../../interfaces';
 import { mediaQueries } from '../../styles/mediaQueries';
 import RenderProjects from '../../components/RenderProjects';
+import Spinner from '../../common/spinner';
 
 const Container = styled.div`
   width: 75vw;
@@ -26,10 +27,19 @@ const ProjectsList = ({ fetchProjects, projects }: ProjectListProps) => {
   useEffect(() => {
     fetchProjects();
   }, []);
+  console.log(projects);
+  const render = () => {
+    if (!projects) return null;
+    if (projects.length <= 0) {
+      return <Spinner />;
+    } else {
+      return <RenderProjects list={projects} />;
+    }
+  };
   return (
     <Container>
       <h3>Projects List</h3>
-      <RenderProjects list={projects} />
+      {render()}
     </Container>
   );
 };

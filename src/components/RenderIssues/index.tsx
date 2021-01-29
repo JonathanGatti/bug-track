@@ -5,7 +5,7 @@ import { Issue } from '../../interfaces';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 65vw;
+  width: 100%;
 `;
 
 const RenderIssues = ({ list }: any) => {
