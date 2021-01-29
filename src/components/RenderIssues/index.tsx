@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { Table, Button, Icon } from 'semantic-ui-react';
 import { Issue } from '../../interfaces';
 import styled from 'styled-components';
+import { mediaQueries } from '../../styles/mediaQueries';
 
 const Container = styled.div`
   width: 100%;
+  @media ${mediaQueries.laptop} {
+  }
 `;
 
 const RenderIssues = ({ list }: any) => {
@@ -39,7 +42,7 @@ const RenderIssues = ({ list }: any) => {
   };
   return (
     <Container>
-      <Table definition>
+      <Table>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Issue Name</Table.HeaderCell>

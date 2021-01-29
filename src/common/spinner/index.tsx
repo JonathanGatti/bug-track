@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader, Segment } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const Container = styled.div`

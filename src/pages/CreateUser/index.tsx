@@ -8,11 +8,15 @@ import { History, LocationState } from 'history';
 import UserForm from '../../components/UserForm';
 import LogInWarning from '../../common/logInWarning';
 import styled from 'styled-components';
+import { mediaQueries } from '../../styles/mediaQueries';
 
 const Container = styled.div`
   width: 30vw;
   margin-left: auto;
   margin-right: auto;
+  @media ${mediaQueries.laptop} {
+    width: 50vw;
+  }
 `;
 
 interface CreateUserProps {

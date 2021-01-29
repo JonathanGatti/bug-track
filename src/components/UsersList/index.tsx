@@ -7,7 +7,7 @@ import { editUser } from '../../actions/usersActions';
 import { connect } from 'react-redux';
 
 const Container = styled.div`
-  max-width: 40vw;
+  max-width: 100%;
   max-height: 23vh;
   overflow: scroll;
 `;

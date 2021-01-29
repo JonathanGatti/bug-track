@@ -9,11 +9,15 @@ import { generateId } from '../../utils/generateId';
 import styled from 'styled-components';
 import LogInWarning from '../../common/logInWarning';
 import { CreateProjectProps, mapState } from './interfaces';
+import { mediaQueries } from '../../styles/mediaQueries';
 
 const Container = styled.div`
   max-width: 40vw;
   margin-left: auto;
   margin-right: auto;
+  @media ${mediaQueries.laptop} {
+    max-width: 50vw;
+  }
 `;
 
 const CreateProject = ({

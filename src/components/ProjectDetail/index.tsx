@@ -8,17 +8,25 @@ import { fetchIssues } from '../../actions/issuesActions';
 import { fetchUsers } from '../../actions/usersActions';
 import { connect } from 'react-redux';
 import { Author, Issue } from '../../interfaces';
-import { ProjectDetailProps, mapState } from './interfaces';
+import { ProjectDetailProps } from './interfaces';
 import RenderIssues from '../RenderIssues';
+import { mediaQueries } from '../../styles/mediaQueries';
 
 const Container = styled.div`
   display: flex;
   width: 100%;
   padding-left: 0;
+  @media ${mediaQueries.tablet} {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const TableContainer = styled.div`
   width: 25vw;
+  @media ${mediaQueries.tablet} {
+    width: 100%;
+  }
 `;
 
 const ProjectDetail = ({

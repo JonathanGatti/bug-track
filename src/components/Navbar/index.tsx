@@ -29,21 +29,23 @@ const Navbar = ({ logOutUser, currentUser }: NavbarProps) => {
     } else {
       return (
         <>
-          {currentUser ? (
-            <Menu.Item position="right">
-              Welcome back {currentUser.userName}
-            </Menu.Item>
-          ) : null}
-          <Button onClick={handleLogOut} inverted color="red">
-            Log Out
-          </Button>
+          {currentUser && (
+            <>
+              <div style={{ marginRight: '2em' }}>
+                Welcome back {currentUser.userName}
+              </div>
+              <Button onClick={handleLogOut} inverted color="red">
+                Log Out
+              </Button>
+            </>
+          )}
         </>
       );
     }
   };
 
   return (
-    <Menu inverted>
+    <Menu inverted stackable>
       <Menu.Item>
         <Link to="/">Home</Link>
       </Menu.Item>
